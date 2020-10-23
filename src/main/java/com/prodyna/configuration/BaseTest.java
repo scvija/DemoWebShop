@@ -21,7 +21,7 @@ public class BaseTest {
     public WebDriver initializeDriver() throws IOException {
 
         Properties prop = new Properties();
-        FileInputStream fis = new FileInputStream("src/main/java/resources/data.properties");
+        FileInputStream fis = new FileInputStream("src/main/java/com/prodyna/resources/data.properties");
 
         prop.load(fis);
         String browserName = prop.getProperty("browser");
@@ -45,7 +45,7 @@ public class BaseTest {
     public String homepageUrl() throws IOException {
 
         Properties prop = new Properties();
-        FileInputStream fis = new FileInputStream("src/main/java/resources/data.properties");
+        FileInputStream fis = new FileInputStream("src/main/java/com/prodyna/resources/data.properties");
 
         prop.load(fis);
         return prop.getProperty("homepage");
@@ -63,7 +63,6 @@ public class BaseTest {
     public void clickElement(WebElement element){
         element.click();
     }
-
 
 }
 
