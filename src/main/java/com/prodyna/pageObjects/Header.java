@@ -7,12 +7,12 @@ import org.openqa.selenium.support.PageFactory;
 import org.testng.asserts.SoftAssert;
 
 
-public class TopMenu {
+public class Header {
 
     public WebDriver driver;
     public SoftAssert softAssert;
 
-    public TopMenu(WebDriver driver){
+    public Header(WebDriver driver){
         this.driver = driver;
         PageFactory.initElements(driver, this);
 
@@ -36,5 +36,14 @@ public class TopMenu {
     @FindBy(xpath = "//a[@href='/logout']")
     public WebElement logout;
 
+
+    public void verifyTopBarNotLoggedIn(){
+        softAssert.assertTrue(register.isDisplayed());
+        softAssert.assertTrue(login.isDisplayed());
+        softAssert.assertTrue(cart.isDisplayed());
+        softAssert.assertTrue(wishlist.isDisplayed());
+
+        softAssert.assertAll();
+    }
 
 }
