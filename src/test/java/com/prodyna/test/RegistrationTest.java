@@ -4,11 +4,14 @@ import com.prodyna.configuration.BasePage;
 import com.prodyna.configuration.BaseTest;
 import com.prodyna.pageObjects.Header;
 import com.prodyna.pageObjects.RegisterPage;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.Properties;
 
 public class RegistrationTest extends BaseTest {
     @BeforeMethod
@@ -17,6 +20,10 @@ public class RegistrationTest extends BaseTest {
         driver.get(homepageUrl());
     }
 
+    @AfterMethod
+    public void closeBrowser() {
+        driver.close();
+    }
 
     @Test
     public void registerPageLayoutTest() {
@@ -48,7 +55,7 @@ public class RegistrationTest extends BaseTest {
     }
 
     @Test
-    public void registerFunctionalityHappyPathTest() throws IOException {
+    public void registerFunctionalityHappyPathTest() {
         Header header = new Header(driver);
         RegisterPage registerPage = new RegisterPage(driver);
         SoftAssert softAssert = new SoftAssert();
@@ -78,4 +85,5 @@ public class RegistrationTest extends BaseTest {
         String myAccountText = header.myAccount.getText();
         softAssert.assertEquals(myAccountText, mailAddress);
     }
+
 }
