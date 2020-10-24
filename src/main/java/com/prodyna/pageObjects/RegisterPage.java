@@ -1,5 +1,6 @@
 package com.prodyna.pageObjects;
 
+import com.prodyna.configuration.BaseTest;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -8,7 +9,7 @@ import org.testng.asserts.SoftAssert;
 
 import java.util.List;
 
-public class RegisterPage {
+public class RegisterPage extends BaseTest {
 
     public WebDriver driver;
     public SoftAssert softAssert = new SoftAssert();
@@ -135,8 +136,12 @@ public class RegisterPage {
         softAssert.assertAll();
     }
 
-    public void mandatoryTextNotDisplayed() {
-        softAssert.assertFalse(mandatoryTexts.isEmpty());
-    }
+    public void fillRegisterForm(String firstName, String lastName, String email, String password){
 
+        enterText(firstNameInput, firstName);
+        enterText(lastnameInput, lastName);
+        enterText(emailInput, email);
+        enterText(passwordInput, password);
+        enterText(confirmedPasswordInput, password);
+    }
 }
