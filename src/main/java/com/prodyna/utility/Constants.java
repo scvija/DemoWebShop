@@ -1,18 +1,19 @@
-package com.prodyna.pageObjects.utility;
+package com.prodyna.utility;
 
 public class Constants {
 
     // PAGES
-    public static final String homepage = "http://demowebshop.tricentis.com/";
-    public static final String registerPage = homepage + "register";
-    public static final String loginPage = homepage + "login";
-    public static final String wishlist = homepage + "wishlist";
-    public static final String search = homepage + "search";
+    public static final String homepageUrl = "http://demowebshop.tricentis.com/";
+    public static final String registerPageUrl = homepageUrl + "register";
+    public static final String loginPageUrl = homepageUrl + "login";
+    public static final String wishlistUrl = homepageUrl + "wishlist";
+    public static final String searchUrl = homepageUrl + "search";
 
     // USER DATA
 
     public static final String firstName = "Peter";
     public static final String lastName = "Peterson";
+    public static final String emailConcat = "peter.peterson@gmail.com";
     public static final String emailInvalid = firstName + lastName;
     public static final String emailLogin = "peterpeterson@gmail.com";
     public static final String password = "Test123!";
