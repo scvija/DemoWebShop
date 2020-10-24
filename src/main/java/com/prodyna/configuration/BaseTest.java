@@ -64,6 +64,9 @@ public class BaseTest {
         element.click();
     }
 
+    public void navigateToPage(String page){
+        driver.get(page);
+    }
 }
 
 
