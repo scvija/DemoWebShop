@@ -13,6 +13,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
+import static com.prodyna.pageObjects.utility.Constants.*;
+
 public class RegistrationTest extends BaseTest {
     @BeforeMethod
     public void initialize() throws IOException {
@@ -65,21 +67,21 @@ public class RegistrationTest extends BaseTest {
 
         //Login with a set of data??
 
-        enterText(registerPage.firstNameInput, "Peter");
-        enterText(registerPage.lastnameInput, "Peterson");
+        enterText(registerPage.firstNameInput, firstName);
+        enterText(registerPage.lastnameInput, lastName);
 
         long timeStamp = System.currentTimeMillis();
-        String mailAddress = timeStamp + "peter.peterson@gmail.com";
+        String mailAddress = timeStamp + emailLogin;
         enterText(registerPage.emailInput, mailAddress);
 
-        enterText(registerPage.passwordInput, "Test123!");
-        enterText(registerPage.confirmedPasswordInput, "Test123!");
+        enterText(registerPage.passwordInput, password);
+        enterText(registerPage.confirmedPasswordInput, password);
 
 //      takes a long time to list through the elements
         registerPage.mandatoryTextNotDisplayed();
 
         clickElement(registerPage.registerButton);
-        softAssert.assertEquals(registerPage.resultMessage.getText(), "Your registration completed");
+        softAssert.assertEquals(registerPage.resultMessage.getText(), registrationComplete);
         clickElement(registerPage.continueButton);
 
         String myAccountText = header.myAccount.getText();
