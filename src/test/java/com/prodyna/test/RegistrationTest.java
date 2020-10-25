@@ -27,11 +27,10 @@ public class RegistrationTest extends BaseTest {
     @Test
     public void registerPageLayoutTest() {
 
-        Header header = new Header(driver);
-        RegisterPage registerPage = new RegisterPage(driver);
+        RegisterPage register = new RegisterPage(driver);
 
         // trouble with the loop inside the method
-        registerPage.verifyRegistrationFormFieldsAreDisplayed();
+        register.verifyRegistrationFormFieldsAreDisplayed();
 
         softAssert.assertAll();
 
@@ -39,10 +38,10 @@ public class RegistrationTest extends BaseTest {
 
     @Test
     public void registerMandatoryText() {
-        RegisterPage registerPage = new RegisterPage(driver);
+        RegisterPage register = new RegisterPage(driver);
 
-        clickElement(registerPage.registerButton);
-        registerPage.verifyRegistrationFormMandatoryText();
+        clickElement(register.registerButton);
+        register.verifyRegistrationFormMandatoryText();
 
     }
 
