@@ -77,6 +77,13 @@ public class BaseTest {
     return isDisplayed;
     }
 
+    public boolean compareWithExpected(String actualText,String expectedText){
+        if (actualText.equalsIgnoreCase(expectedText)) {
+            return true;
+        }
+        return false;
+    }
+
 
 }
 
