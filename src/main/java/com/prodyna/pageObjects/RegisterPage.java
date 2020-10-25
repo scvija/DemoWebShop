@@ -1,6 +1,7 @@
 package com.prodyna.pageObjects;
 
 import com.prodyna.configuration.BaseTest;
+import lombok.Data;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -9,6 +10,7 @@ import org.testng.asserts.SoftAssert;
 
 import java.util.List;
 
+@Data
 public class RegisterPage extends BaseTest {
 
     public WebDriver driver;
