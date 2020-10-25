@@ -57,8 +57,8 @@ public class BaseTest {
         element.sendKeys(inputText);
     }
 
-    public void isElementDisplayed(WebElement element){
-        softAssert.assertTrue(element.isDisplayed());
+    public boolean isElementDisplayed(WebElement element){
+        return element.isDisplayed();
     }
 
     public void clickElement(WebElement element){
@@ -76,6 +76,8 @@ public class BaseTest {
         }
     return isDisplayed;
     }
+
+
 }
 
 

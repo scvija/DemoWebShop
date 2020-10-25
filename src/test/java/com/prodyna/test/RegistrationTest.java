@@ -53,7 +53,7 @@ public class RegistrationTest extends BaseTest {
         clickElement(register.registerButton);
 
         long timeStamp = System.currentTimeMillis();
-        String mailAddressAndTime = timeStamp + emailLogin;
+        String mailAddressAndTime = timeStamp + emailConcat;
 
         register.fillRegisterForm(firstName,lastName,mailAddressAndTime, password);
         clickElement(register.registerButton);

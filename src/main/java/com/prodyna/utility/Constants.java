@@ -9,7 +9,7 @@ public class Constants {
     public static final String wishlistUrl = homepageUrl + "wishlist";
     public static final String searchUrl = homepageUrl + "search";
 
-    // USER DATA
+    // REGISTER USER DATA
 
     public static final String firstName = "Peter";
     public static final String lastName = "Peterson";

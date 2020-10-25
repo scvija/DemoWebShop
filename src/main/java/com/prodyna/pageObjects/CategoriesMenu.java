@@ -23,28 +23,28 @@ public class CategoriesMenu extends BaseTest {
     }
 
     @FindBy(xpath = "//ul[@class='top-menu'] //a[@href='/books']")
-    WebElement books;
+    public WebElement books;
 
     @FindBy(xpath = "//ul[@class='top-menu'] //a[@href='/computers']")
-    WebElement computers;
+    public WebElement computers;
 
     @FindBy(xpath = "//ul[@class='top-menu'] //a[@href='/electronics']")
-    WebElement electronics;
+    public WebElement electronics;
 
     @FindBy(xpath = "//ul[@class='top-menu'] //a[@href='/apparel-shoes']")
-    WebElement apparelShoes;
+    public WebElement apparelShoes;
 
     @FindBy(xpath = "//ul[@class='top-menu'] //a[@href='/digital-downloads']")
-    WebElement digitalDownloads;
+    public WebElement digitalDownloads;
 
     @FindBy(xpath = "//ul[@class='top-menu'] //a[@href='/jewelry']")
-    WebElement jewelry;
+    public WebElement jewelry;
 
     @FindBy(xpath = "//ul[@class='top-menu'] //a[@href='/gift-cards']")
-    WebElement giftCards;
+    public WebElement giftCards;
 
     @FindBy(xpath = "//ul[@class='top-menu']/li")
-    List<WebElement> categoriesMenu;
+    public List<WebElement> categoriesMenu;
     
     
 
