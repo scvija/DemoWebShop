@@ -3,6 +3,7 @@ package com.prodyna.configuration;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.List;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
@@ -66,6 +67,14 @@ public class BaseTest {
 
     public void navigateToPage(String page){
         driver.get(page);
+    }
+
+    public boolean areElementsDisplayed(List<WebElement> list) {
+        boolean isDisplayed = false;
+        for (WebElement element : list) {
+           isDisplayed = element.isDisplayed();
+        }
+    return isDisplayed;
     }
 }
 
