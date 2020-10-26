@@ -13,6 +13,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.Select;
 import org.testng.asserts.SoftAssert;
 
 public class BaseTest {
@@ -82,6 +83,22 @@ public class BaseTest {
             return true;
         }
         return false;
+    }
+
+    public void selectValueInField(WebElement element, String value){
+        Select selector = new Select(element);
+        selector.selectByVisibleText(value);
+    }
+
+    public boolean elementNotFound(WebElement element){
+
+        boolean isNextpageDisplayed = false;
+        try {
+            isNextpageDisplayed = isElementDisplayed(element);
+        } catch (org.openqa.selenium.NoSuchElementException ex) {
+            isNextpageDisplayed = true;
+        }
+        return isNextpageDisplayed;
     }
 
 
