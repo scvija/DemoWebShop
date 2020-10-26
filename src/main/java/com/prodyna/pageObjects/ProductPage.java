@@ -19,6 +19,21 @@ public class ProductPage extends BaseTest {
     @FindBy(className = "page-title")
     public WebElement pageTitle;
 
+    @FindBy(id = "products-orderby")
+    public WebElement sortBy;
+
+    @FindBy(id = "products-pagesize")
+    public WebElement pageSize;
+
+    @FindBy(xpath = "//li[@class='next-page']")
+    public WebElement nextPage;
+
+    @FindBy(id = "products-viewmode")
+    public WebElement viewMode;
+
+    @FindBy(xpath = "//div[@class='product-selectors']/div")
+    public  List<WebElement> productSelectors;
+
     public boolean verifyCategoriesTitles(List<WebElement> list) {
         boolean titlesCorrect = true;
         for (WebElement element : list) {
