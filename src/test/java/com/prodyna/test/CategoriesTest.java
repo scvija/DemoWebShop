@@ -46,4 +46,25 @@ public class CategoriesTest extends BaseTest {
         driver.navigate().back();
     }
 
+    @Test
+    public void filteringPaginationTest() {
+        CategoriesMenu categories = new CategoriesMenu(driver);
+        ProductPage products = new ProductPage(driver);
+
+
+        categories.getApparelShoes().click();
+        softAssert.assertTrue(areElementsDisplayed(products.productSelectors));
+        softAssert.assertTrue(isElementDisplayed(products.nextPage));
+
+        selectValueInField(products.pageSize, "12");
+
+        softAssert.assertTrue(elementNotFound(products.nextPage));
+
+        softAssert.assertAll();
+
+
+    }
+
+
+
 }
