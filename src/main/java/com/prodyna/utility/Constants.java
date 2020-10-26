@@ -33,5 +33,25 @@ public class Constants {
     public static final String emailExists = "The specified email already exists";
     public static final String registrationComplete = "Your registration completed";
 
+    // PRODUCTS PAGE
 
+    // VALUES FOR SORTING DROPDOWNS
+
+    public static final String sortPosition = "Position";
+    public static final String sortNameAsc = "Name: A to Z";
+    public static final String sortNameDesc = "Name: Z to A";
+    public static final String sortLow = "Price: Low to High";
+    public static final String sortHigh = "Price: High to Low";
+    public static final String sortCreated = "Created on";
+
+    // VALUES FOR ELEMENTS PER PAGE
+
+    public static final int display4 = 4;
+    public static final int display8 = 8;
+    public static final int display12= 12;
+
+    // VALUES FOR VIEW AS
+
+    public static final String grid = "Grid";
+    public static final String list = "List";
 }
