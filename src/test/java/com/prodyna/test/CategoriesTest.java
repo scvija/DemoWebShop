@@ -10,6 +10,8 @@ import org.testng.annotations.Test;
 
 import java.io.IOException;
 
+import static com.prodyna.utility.Constants.*;
+
 public class CategoriesTest extends BaseTest {
 
     @BeforeMethod
@@ -44,6 +46,8 @@ public class CategoriesTest extends BaseTest {
         clickElement(categories.computers);
         softAssert.assertTrue(compareWithExpected(categories.computers.getText(), products.pageTitle.getText()));
         driver.navigate().back();
+
+        softAssert.assertAll();
     }
 
     @Test
@@ -51,12 +55,20 @@ public class CategoriesTest extends BaseTest {
         CategoriesMenu categories = new CategoriesMenu(driver);
         ProductPage products = new ProductPage(driver);
 
-
-        categories.getApparelShoes().click();
+        clickElement(categories.apparelShoes);
         softAssert.assertTrue(areElementsDisplayed(products.productSelectors));
         softAssert.assertTrue(isElementDisplayed(products.nextPage));
 
-        selectValueInField(products.pageSize, "12");
+        //could do it with a look, where to store it? point 12.
+        // problem - categories where there is not enough products for a page, like 2,5,9,
+        selectValueInField(products.pageSize, display4);
+        softAssert.assertEquals(countElementsUsingLocator(products.product), 4);
+
+        selectValueInField(products.pageSize, display8);
+        softAssert.assertEquals(countElementsUsingLocator(products.product), 8);
+
+        selectValueInField(products.pageSize, display12);
+        softAssert.assertEquals(countElementsUsingLocator(products.product), 12);
 
         softAssert.assertTrue(elementNotFound(products.nextPage));
 
