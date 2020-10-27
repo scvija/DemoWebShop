@@ -1,6 +1,7 @@
 package com.prodyna.pageObjects;
 
 import com.prodyna.configuration.BaseTest;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -15,6 +16,7 @@ public class ProductPage extends BaseTest {
         this.driver = driver;
         PageFactory.initElements(driver, this);
     }
+
 
     @FindBy(className = "page-title")
     public WebElement pageTitle;
@@ -33,6 +35,8 @@ public class ProductPage extends BaseTest {
 
     @FindBy(xpath = "//div[@class='product-selectors']/div")
     public  List<WebElement> productSelectors;
+
+    public By product = By.className("product-item");
 
     public boolean verifyCategoriesTitles(List<WebElement> list) {
         boolean titlesCorrect = true;
