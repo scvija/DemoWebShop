@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="All Test Suite">
+    <test verbose="2" preserve-order="true"
+          name="D:/Prodyna/LearnCurve/TALS/Bitbucket/tals-v1/src/test/java/com/prodyna/test">
+        <classes>
+            <class name="com.prodyna.test.CategoriesTest">
+                <methods>
+                    <include name="categoriesMenuLayoutTest"/>
+                    <include name="categoryNavigationTest"/>
+                    <include name="filteringPaginationTest"/>
+                </methods>
+            </class>
+            <class name="com.prodyna.test.RegistrationTest">
+                <methods>
+                    <include name="registerPageLayoutTest"/>
+                    <include name="registerMandatoryText"/>
+                    <include name="registerFunctionalityHappyPathTest"/>
+                    <include name="emailInputNegativeTest"/>
+                    <include name="passwordInputNegativeTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>
