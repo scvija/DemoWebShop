@@ -1,20 +1,19 @@
 package com.prodyna.configuration;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.List;
-import java.util.Properties;
-import java.util.concurrent.TimeUnit;
-
 import io.github.bonigarcia.wdm.WebDriverManager;
-
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.asserts.SoftAssert;
+
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.List;
+import java.util.Properties;
+import java.util.concurrent.TimeUnit;
 
 public class BaseTest {
     public WebDriver driver;
@@ -90,7 +89,7 @@ public class BaseTest {
         selector.selectByVisibleText(value);
     }
 
-    public boolean elementNotFound(WebElement element){
+    public boolean elementNotFound(WebElement element) {
 
         boolean isNextpageDisplayed = false;
         try {
@@ -99,6 +98,12 @@ public class BaseTest {
             isNextpageDisplayed = true;
         }
         return isNextpageDisplayed;
+    }
+
+    public int countElementsUsingLocator(By locator) {
+
+        int count = driver.findElements(locator).size();
+        return count;
     }
 
 
