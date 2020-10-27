@@ -46,9 +46,9 @@ public class Constants {
 
     // VALUES FOR ELEMENTS PER PAGE
 
-    public static final int display4 = 4;
-    public static final int display8 = 8;
-    public static final int display12= 12;
+    public static final String display4 = "4";
+    public static final String display8 = "8";
+    public static final String display12= "12";
 
     // VALUES FOR VIEW AS
 
