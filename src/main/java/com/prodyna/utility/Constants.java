@@ -54,4 +54,18 @@ public class Constants {
 
     public static final String grid = "Grid";
     public static final String list = "List";
+
+
+    // SEARCH
+
+    // HEADER SEARCH
+
+    public static final String headerSearchStandardText = "Search store";
+    public static final String searchTitle = "Search";
+    public static final String searchShort = "ta";
+    public static final String searchInvalid = "DoesNotExist";
+
+    public static final String noSearchResults = "No products were found that matched your criteria.";
+    public static final String minSearchLength =  "Search term minimum length is 3 characters ";
+
 }
