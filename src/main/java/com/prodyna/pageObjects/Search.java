@@ -21,4 +21,46 @@ public class Search extends BaseTest {
 
     @FindBy(xpath = "//input[@value='Search']")
     public WebElement headerSearchButton;
+
+    @FindBy(xpath = "//label[@for='Q']")
+    public WebElement searchFieldLabel;
+
+    @FindBy(xpath = "//input[@id='Q']")
+    public WebElement searchFieldInput;
+
+    @FindBy(xpath = "//label[@for='As']")
+    public WebElement advancedSearch;
+
+    @FindBy(xpath = "//label[@for='Cid']")
+    public WebElement categoryLabel;
+
+    @FindBy(id = "Cid")
+    public WebElement categoryDropdown;
+
+    @FindBy(xpath = "//label[@for='Isc']")
+    public WebElement autoSearchSubCategories;
+
+    @FindBy(xpath = "//label[@for='Mid']")
+    public WebElement manufacturerLabel;
+
+    @FindBy(id = "Mid")
+    public WebElement manufacturerDropdown;
+
+    @FindBy(xpath = "//label[text() = 'Price range:']")
+    public WebElement priceRangeLabel;
+
+    @FindBy(id = "Pf")
+    public WebElement priceFromInput;
+
+    @FindBy(id = "Pt")
+    public WebElement priceToInput;
+
+    @FindBy(id = "Sid")
+    public WebElement searchDescriptions;
+
+    @FindBy(xpath = "input[class='button-1 search-button']")
+    public  WebElement advancedSearchButton;
+
+
+
 }
