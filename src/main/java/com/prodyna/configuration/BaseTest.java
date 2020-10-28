@@ -106,6 +106,10 @@ public class BaseTest {
         return count;
     }
 
+    public String getFieldText(WebElement element){
+        String textValue = element.getAttribute("value");
+        return textValue;
+    }
 
 }
 
