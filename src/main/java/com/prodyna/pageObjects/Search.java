@@ -22,11 +22,17 @@ public class Search extends BaseTest {
     @FindBy(xpath = "//input[@value='Search']")
     public WebElement headerSearchButton;
 
+    @FindBy(id = "ui-id-1")
+    public WebElement headerSearchAutocompleteDialogue;
+
+    @FindBy(xpath = "//ul[@id='ui-id-1']//li[1]")
+    public WebElement headerSearchFirstRecommendation;
+
     @FindBy(xpath = "//label[@for='Q']")
-    public WebElement searchFieldLabel;
+    public WebElement advancedSearchFieldLabel;
 
     @FindBy(xpath = "//input[@id='Q']")
-    public WebElement searchFieldInput;
+    public WebElement advancedSearchFieldInput;
 
     @FindBy(xpath = "//label[@for='As']")
     public WebElement advancedSearch;
