@@ -6,7 +6,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.asserts.SoftAssert;
 
 import java.io.FileInputStream;
@@ -109,6 +111,11 @@ public class BaseTest {
     public String getFieldText(WebElement element){
         String textValue = element.getAttribute("value");
         return textValue;
+    }
+
+    public void waitUntilVisible(WebElement element){
+        WebDriverWait wait = new WebDriverWait(driver, 5 );
+        wait.until(ExpectedConditions.visibilityOf(element));
     }
 
 }

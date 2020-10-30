@@ -64,6 +64,7 @@ public class Constants {
     public static final String searchTitle = "Search";
     public static final String searchShort = "ta";
     public static final String searchInvalid = "DoesNotExist";
+    public static final String searchValidPartial = "boo";
 
     public static final String noSearchResults = "No products were found that matched your criteria.";
     public static final String minSearchLength =  "Search term minimum length is 3 characters ";
