@@ -17,6 +17,8 @@ import java.util.List;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
+import static org.apache.commons.lang3.StringUtils.*;
+
 public class BaseTest {
     public WebDriver driver;
     public SoftAssert softAssert = new SoftAssert();
@@ -117,6 +119,10 @@ public class BaseTest {
         WebDriverWait wait = new WebDriverWait(driver, 5 );
         wait.until(ExpectedConditions.visibilityOf(element));
     }
+
+    public boolean textContainsIgnoreCase(String containing, String toBeContained){
+         return containsIgnoreCase(containing, toBeContained);
+        }
 
 }
 
