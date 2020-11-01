@@ -36,6 +36,12 @@ public class ProductPage extends BaseTest {
     @FindBy(xpath = "//div[@class='product-selectors']/div")
     public  List<WebElement> productSelectors;
 
+    @FindBy(className = "product-name")
+    public WebElement productName;
+
+    @FindBy(className = "product-title")
+    public WebElement productTileTitle;
+
     public By product = By.className("product-item");
 
     public boolean verifyCategoriesTitles(List<WebElement> list) {

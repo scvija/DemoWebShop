@@ -67,8 +67,14 @@ public class Search extends BaseTest {
     public WebElement searchDescriptions;
 
     @FindBy(xpath = "input[class='button-1 search-button']")
-    public  WebElement advancedSearchButton;
+    public WebElement advancedSearchButton;
 
+    @FindBy(className = "warning")
+    public WebElement warning;
 
+    @FindBy(className = "result")
+    public WebElement result;
 
+    @FindBy(className = "product-title")
+    public WebElement productTileTitle;
 }
