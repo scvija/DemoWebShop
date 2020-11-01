@@ -3,13 +3,9 @@ package com.prodyna.test;
 import com.prodyna.configuration.BaseTest;
 import com.prodyna.pageObjects.ProductPage;
 import com.prodyna.pageObjects.Search;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import org.testng.asserts.SoftAssert;
 
 import java.io.IOException;
 
@@ -29,37 +25,87 @@ public class SearchTest extends BaseTest {
     }
 
     @Test
-    public void headerSearchTest() {
+    public void headerSearchTestLayout() {
         Search search = new Search(driver);
         ProductPage products = new ProductPage(driver);
 
-        isElementDisplayed(search.headerSearch);
-        isElementDisplayed(search.headerSearchButton);
+        softAssert.assertTrue(isElementDisplayed(search.headerSearch));
+        softAssert.assertTrue(isElementDisplayed(search.headerSearchButton));
 
         softAssert.assertEquals(getFieldText(search.headerSearch), headerSearchStandardText);
 
         search.headerSearch.click();
-        softAssert.assertEquals(getFieldText(search.headerSearch),"");
+        softAssert.assertEquals(getFieldText(search.headerSearch), "");
+
+        softAssert.assertAll();
+    }
+
+    @Test
+    public void headerSearchShort() {
+        Search search = new Search(driver);
+        ProductPage products = new ProductPage(driver);
+
 
         enterText(search.headerSearch, searchShort);
-        search.headerSearchButton.click();
-        // assertrue contains or even equals, the url is predictable
-        // softAssert.assertTrue(driver.getCurrentUrl().contains(searchUrl));
+        clickElement(search.headerSearchButton);
+
         softAssert.assertEquals(products.pageTitle.getText(), searchTitle);
+        softAssert.assertEquals(search.warning.getText(), minSearchLength);
 
         String advancedSearchFieldValue = getFieldText(search.advancedSearchFieldInput);
-        softAssert.assertEquals(advancedSearchFieldValue,searchShort);
+        softAssert.assertEquals(advancedSearchFieldValue, searchShort);
 
-        enterText(search.headerSearch, searchValidPartial);
+        softAssert.assertAll();
+    }
 
+    @Test
+    public void headerSearchAutocomplete() {
+        Search search = new Search(driver);
+        ProductPage products = new ProductPage(driver);
+
+        enterText(search.headerSearch, searchPartialValid);
 
         waitUntilVisible(search.headerSearchAutocompleteDialogue);
         softAssert.assertTrue(search.headerSearchAutocompleteDialogue.isDisplayed());
 
+        String firstRecommendationText = search.headerSearchFirstRecommendation.getText();
+        softAssert.assertTrue(textContainsIgnoreCase(firstRecommendationText, searchPartialValid));
 
-        System.out.println(search.headerSearchFirstRecommendation.getText());
+        clickElement(search.headerSearchFirstRecommendation);
+        softAssert.assertEquals(products.productName.getText(), firstRecommendationText);
+
         softAssert.assertAll();
 
+    }
+
+    @Test
+    public void headerSearchInvalid() {
+        Search search = new Search(driver);
+
+        enterText(search.headerSearch, searchInvalid);
+        softAssert.assertFalse(search.headerSearchAutocompleteDialogue.isDisplayed());
+
+        clickElement(search.headerSearchButton);
+        softAssert.assertEquals(search.result.getText(), noSearchResults);
+
+        clickElement(search.headerSearchButton);
+
+        driver.switchTo().alert().accept();
+
+        softAssert.assertAll();
+    }
+    @Test
+    public void headerSearchValid() {
+        Search search = new Search(driver);
+        ProductPage products = new ProductPage(driver);
+
+        enterText(search.headerSearch, searchPartialValid);
+
+        clickElement(search.headerSearchButton);
+
+        softAssert.assertEquals(products.productTileTitle.getText(), searchHealthBook);
+
+        softAssert.assertAll();
 
 
     }
