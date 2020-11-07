@@ -109,4 +109,43 @@ public class SearchTest extends BaseTest {
 
 
     }
+
+    @Test
+    public void advancedSearchLayout() {
+        Search search = new Search(driver);
+
+        softAssert.assertTrue(isElementDisplayed(search.advancedSearchFieldLabel));
+        softAssert.assertTrue(isElementDisplayed(search.advancedSearchFieldInput));
+
+        boolean advancedSearchCheckboxValue = search.advancedSearch.isSelected();
+
+        softAssert.assertFalse(advancedSearchCheckboxValue);
+
+        clickElement(search.advancedSearch);
+
+        softAssert.assertTrue(isElementDisplayed(search.categoryLabel));
+        softAssert.assertTrue(isElementDisplayed(search.categoryDropdown));
+
+        softAssert.assertTrue(isElementDisplayed(search.autoSearchSubCategories));
+
+        softAssert.assertTrue(isElementDisplayed(search.manufacturerLabel));
+        softAssert.assertTrue(isElementDisplayed(search.manufacturerDropdown));
+
+        softAssert.assertTrue(isElementDisplayed(search.priceRangeLabel));
+        softAssert.assertTrue(isElementDisplayed(search.priceFromInput));
+        softAssert.assertTrue(isElementDisplayed(search.priceToInput));
+
+        softAssert.assertTrue(isElementDisplayed(search.searchDescriptions));
+
+        softAssert.assertTrue(isElementDisplayed(search.advancedSearchButton));
+
+    }
+
+    public void advancedSearchNegativeTest() {
+        Search search = new Search(driver);
+
+        enterText(search.advancedSearchFieldInput, searchShort);
+        clickElement(search.advancedSearchButton);
+
+    }
 }
