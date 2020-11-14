@@ -66,7 +66,7 @@ public class Search extends BaseTest {
     @FindBy(id = "Sid")
     public WebElement searchDescriptions;
 
-    @FindBy(xpath = "input[class='button-1 search-button']")
+    @FindBy(xpath = "//input[@class='button-1 search-button']")
     public WebElement advancedSearchButton;
 
     @FindBy(className = "warning")
@@ -77,4 +77,13 @@ public class Search extends BaseTest {
 
     @FindBy(className = "product-title")
     public WebElement productTileTitle;
+
+    public void startAdvancedSearch(String textInput){
+        Search search = new Search(driver);
+
+        search.advancedSearchFieldInput.clear();
+        search.advancedSearchFieldInput.sendKeys(textInput);
+
+        search.advancedSearchButton.click();
+    }
 }
