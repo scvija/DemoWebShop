@@ -1,5 +1,6 @@
 package com.prodyna.configuration;
 
+import com.prodyna.pageObjects.Search;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -17,7 +18,7 @@ import java.util.List;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
-import static org.apache.commons.lang3.StringUtils.*;
+import static org.apache.commons.lang3.StringUtils.containsIgnoreCase;
 
 public class BaseTest {
     public WebDriver driver;
@@ -82,10 +83,7 @@ public class BaseTest {
     }
 
     public boolean compareWithExpected(String actualText,String expectedText){
-        if (actualText.equalsIgnoreCase(expectedText)) {
-            return true;
-        }
-        return false;
+        return actualText.equalsIgnoreCase(expectedText);
     }
 
     public void selectValueInField(WebElement element, String value){
@@ -105,25 +103,31 @@ public class BaseTest {
     }
 
     public int countElementsUsingLocator(By locator) {
-
-        int count = driver.findElements(locator).size();
-        return count;
+        return driver.findElements(locator).size();
     }
 
     public String getFieldText(WebElement element){
-        String textValue = element.getAttribute("value");
-        return textValue;
+        return element.getAttribute("value");
+
     }
 
-    public void waitUntilVisible(WebElement element){
-        WebDriverWait wait = new WebDriverWait(driver, 5 );
+    public void waitUntilVisible(WebElement element) {
+        WebDriverWait wait = new WebDriverWait(driver, 5);
         wait.until(ExpectedConditions.visibilityOf(element));
     }
 
-    public boolean textContainsIgnoreCase(String containing, String toBeContained){
-         return containsIgnoreCase(containing, toBeContained);
-        }
+    public boolean textContainsIgnoreCase(String containing, String toBeContained) {
+        return containsIgnoreCase(containing, toBeContained);
+    }
 
+    public void startHeaderSearch(String text) {
+        Search search = new Search(driver);
+
+        search.headerSearch.clear();
+        search.headerSearch.sendKeys(text);
+
+        search.headerSearchButton.click();
+    }
 }
 
 
