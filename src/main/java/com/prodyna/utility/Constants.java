@@ -87,5 +87,16 @@ public class Constants {
     public static final String searchCategoryJewelry = "Jewelry";
     public static final String searchCategoryGift = "Gift Cards";
 
+    public static final String searchManufacturerAll = "All";
+    public static final String searchManufacturerTricentis = "Tricentis";
+
+    public static final String searchPriceHigh = "10000";
+    public static final String searchPriceMiddle = "1000";
+    public static final String searchPriceLow = "100";
+
+    public static final String searchBookPartialDescription = "Worried about your health";
+
+
+
 
 }
