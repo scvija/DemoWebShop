@@ -308,7 +308,7 @@ public class SearchTest extends BaseTest {
 
         clickElement(products.productTileTitle);
 
-        softAssert.assertTrue(textContainsIgnoreCase(products.productShortDescription.getText(), searchBookPartialDescription+1), "The text is not contained in the product description");
+        softAssert.assertTrue(textContainsIgnoreCase(products.productShortDescription.getText(), searchBookPartialDescription), "The text is not contained in the product description");
 
 
         softAssert.assertAll();
