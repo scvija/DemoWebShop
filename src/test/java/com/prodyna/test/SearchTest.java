@@ -139,13 +139,37 @@ public class SearchTest extends BaseTest {
 
         softAssert.assertTrue(isElementDisplayed(search.advancedSearchButton));
 
+        softAssert.assertAll();
+
     }
 
+    @Test
     public void advancedSearchNegativeTest() {
         Search search = new Search(driver);
 
-        enterText(search.advancedSearchFieldInput, searchShort);
-        clickElement(search.advancedSearchButton);
+        search.startAdvancedSearch(searchShort);
 
+        softAssert.assertEquals(search.warning.getText(), minSearchLength);
+
+        search.startAdvancedSearch(emailInvalid);
+
+        softAssert.assertEquals(search.result.getText(), noSearchResults);
+        softAssert.assertAll();
     }
+
+////    @Test
+//    public void advancedSearchIgnoreCase{
+//        Search search = new Search(driver);
+//        ProductPage products = new ProductPage(driver);
+//
+//        search.startAdvancedSearch(computerCapital);
+//        int countWithCapital = countElementsUsingLocator(products.product);
+//
+//        search.startAdvancedSearch(computerLower);
+//        int countWithLower = countElementsUsingLocator(products.product);
+//
+//        softAssert.assertEquals(countWithCapital, countWithLower);
+//
+//    }
+//
 }
