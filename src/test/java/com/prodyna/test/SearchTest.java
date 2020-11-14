@@ -117,11 +117,11 @@ public class SearchTest extends BaseTest {
         softAssert.assertTrue(isElementDisplayed(search.advancedSearchFieldLabel));
         softAssert.assertTrue(isElementDisplayed(search.advancedSearchFieldInput));
 
-        boolean advancedSearchCheckboxValue = search.advancedSearch.isSelected();
+        boolean advancedSearchCheckboxValue = search.advancedSearchCheckbox.isSelected();
 
         softAssert.assertFalse(advancedSearchCheckboxValue);
 
-        clickElement(search.advancedSearch);
+        clickElement(search.advancedSearchCheckbox);
 
         softAssert.assertTrue(isElementDisplayed(search.categoryLabel));
         softAssert.assertTrue(isElementDisplayed(search.categoryDropdown));
@@ -157,19 +157,163 @@ public class SearchTest extends BaseTest {
         softAssert.assertAll();
     }
 
-////    @Test
-//    public void advancedSearchIgnoreCase{
-//        Search search = new Search(driver);
-//        ProductPage products = new ProductPage(driver);
-//
-//        search.startAdvancedSearch(computerCapital);
-//        int countWithCapital = countElementsUsingLocator(products.product);
-//
-//        search.startAdvancedSearch(computerLower);
-//        int countWithLower = countElementsUsingLocator(products.product);
-//
-//        softAssert.assertEquals(countWithCapital, countWithLower);
-//
-//    }
-//
+    @Test
+    public void advancedSearchIgnoreCaseTest() {
+        Search search = new Search(driver);
+        ProductPage products = new ProductPage(driver);
+
+        search.startAdvancedSearch(computerCapital);
+        int countWithCapital = countElementsUsingLocator(products.product);
+
+
+        search.startAdvancedSearch(computerLower);
+        int countWithLower = countElementsUsingLocator(products.product);
+
+        softAssert.assertEquals(countWithCapital, countWithLower);
+
+        softAssert.assertAll();
+    }
+
+    @Test
+    public void advancedSearchProductInDifferentCategoryTest() {
+        Search search = new Search(driver);
+        ProductPage products = new ProductPage(driver);
+
+        clickElement(search.advancedSearchCheckbox);
+
+        selectValueInField(search.categoryDropdown, searchCategoryBooks);
+        search.startAdvancedSearch(computerLower);
+
+        softAssert.assertEquals(search.result.getText(), noSearchResults);
+
+        search.startAdvancedSearch(searchHealthBook);
+
+        int numberOfProducts = countElementsUsingLocator(products.product);
+        softAssert.assertTrue(numberOfProducts > 0);
+
+        softAssert.assertAll();
+    }
+
+    @Test
+    public void advancedSearchProductInSubCategoryTest() {
+        Search search = new Search(driver);
+        ProductPage products = new ProductPage(driver);
+
+        clickElement(search.advancedSearchCheckbox);
+
+        selectValueInField(search.categoryDropdown, searchCategoryComputers);
+        search.startAdvancedSearch(computerLower);
+
+        softAssert.assertEquals(search.result.getText(), noSearchResults);
+
+        clickElement(search.autoSearchSubCategories);
+
+        search.startAdvancedSearch(computerLower);
+
+        int numberOfProducts = countElementsUsingLocator(products.product);
+        softAssert.assertTrue(numberOfProducts > 0);
+
+        softAssert.assertAll();
+    }
+
+    @Test
+    public void advancedSearchManufacturerTest() {
+        Search search = new Search(driver);
+        ProductPage products = new ProductPage(driver);
+
+        clickElement(search.advancedSearchCheckbox);
+
+        selectValueInField(search.manufacturerDropdown, searchManufacturerTricentis);
+        search.startAdvancedSearch(computerLower);
+
+        softAssert.assertEquals(search.result.getText(), noSearchResults);
+
+        selectValueInField(search.manufacturerDropdown, searchManufacturerAll);
+        search.startAdvancedSearch(computerLower);
+
+        int numberOfProducts = countElementsUsingLocator(products.product);
+        softAssert.assertTrue(numberOfProducts > 0);
+
+        softAssert.assertAll();
+    }
+    @Test
+    public void advancedSearchFromPriceTest() {
+        Search search = new Search(driver);
+        ProductPage products = new ProductPage(driver);
+
+        clickElement(search.advancedSearchCheckbox);
+
+        enterText(search.priceFromInput, searchPriceHigh);
+        search.startAdvancedSearch(computerLower);
+
+        softAssert.assertEquals(search.result.getText(), noSearchResults);
+
+        enterText(search.priceFromInput, searchPriceMiddle);
+        search.startAdvancedSearch(computerLower);
+
+        int numberOfProductsMiddlePrice = countElementsUsingLocator(products.product);
+        softAssert.assertTrue(numberOfProductsMiddlePrice > 0);
+
+        enterText(search.priceFromInput, searchPriceLow);
+        search.startAdvancedSearch(computerLower);
+
+        int numberOfProductsLowPrice = countElementsUsingLocator(products.product);
+        softAssert.assertTrue(numberOfProductsLowPrice > numberOfProductsMiddlePrice);
+
+        softAssert.assertAll();
+    }
+    @Test
+    public void advancedSearchToPriceTest() {
+        Search search = new Search(driver);
+        ProductPage products = new ProductPage(driver);
+
+        clickElement(search.advancedSearchCheckbox);
+
+        enterText(search.priceToInput, searchPriceLow);
+        search.startAdvancedSearch(computerLower);
+
+        softAssert.assertEquals(search.result.getText(), noSearchResults);
+
+        enterText(search.priceToInput, searchPriceMiddle);
+        search.startAdvancedSearch(computerLower);
+
+        int numberOfProductsMiddlePrice = countElementsUsingLocator(products.product);
+        softAssert.assertTrue(numberOfProductsMiddlePrice > 0);
+
+        enterText(search.priceToInput, searchPriceHigh);
+        search.startAdvancedSearch(computerLower);
+
+        int numberOfProductsHighPrice = countElementsUsingLocator(products.product);
+        softAssert.assertTrue(numberOfProductsHighPrice > numberOfProductsMiddlePrice);
+
+        softAssert.assertAll();
+    }
+
+    @Test
+    public void advancedSearchInDescriptionTest() {
+        Search search = new Search(driver);
+        ProductPage products = new ProductPage(driver);
+
+        clickElement(search.advancedSearchCheckbox);
+
+        search.startAdvancedSearch(searchBookPartialDescription);
+
+        softAssert.assertEquals(search.result.getText(), noSearchResults);
+
+        clickElement(search.searchDescriptions);
+        search.startAdvancedSearch(searchBookPartialDescription);
+
+        int numberOfProductsMiddlePrice = countElementsUsingLocator(products.product);
+        softAssert.assertTrue(numberOfProductsMiddlePrice > 0);
+
+        clickElement(products.productTileTitle);
+
+        softAssert.assertTrue(textContainsIgnoreCase(products.productShortDescription.getText(), searchBookPartialDescription+1), "The text is not contained in the product description");
+
+
+        softAssert.assertAll();
+    }
+
+
+
 }

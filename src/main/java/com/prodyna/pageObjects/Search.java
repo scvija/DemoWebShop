@@ -37,7 +37,7 @@ public class Search extends BaseTest {
     public WebElement advancedSearchFieldInput;
 
     @FindBy(xpath = "//label[@for='As']")
-    public WebElement advancedSearch;
+    public WebElement advancedSearchCheckbox;
 
     @FindBy(xpath = "//label[@for='Cid']")
     public WebElement categoryLabel;
