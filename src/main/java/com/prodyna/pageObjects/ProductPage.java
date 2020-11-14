@@ -42,6 +42,9 @@ public class ProductPage extends BaseTest {
     @FindBy(className = "product-title")
     public WebElement productTileTitle;
 
+    @FindBy(className = "short-description")
+    public WebElement productShortDescription;
+
     public By product = By.className("product-item");
 
     public boolean verifyCategoriesTitles(List<WebElement> list) {
