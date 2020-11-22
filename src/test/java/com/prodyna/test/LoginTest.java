@@ -58,7 +58,6 @@ public class LoginTest extends BaseTest {
         ProductPage products = new ProductPage(driver);
 
         clickElement(login.newCustomerRegisterButton);
-
         softAssert.assertEquals(products.pageTitle.getText(), "Register");
 
         softAssert.assertAll();
@@ -73,7 +72,6 @@ public class LoginTest extends BaseTest {
         // TODO loginmethod? where to store
 
         login.loginWithCredentials(emailValidLogin, passwordValid);
-
         softAssert.assertEquals(header.myAccount.getText(), emailValidLogin);
 
         softAssert.assertAll();
@@ -82,11 +80,64 @@ public class LoginTest extends BaseTest {
 
     @Test
     public void loginPageLoginNegativeTest(){
-
         LoginPage login = new LoginPage(driver);
 
+        clickElement(login.returningLoginButton);
+        softAssert.assertEquals(login.returningErrorMessage.getText(), loginPageReturningErrorMessageAccountNotFound);
 
+        login.loginWithCredentials(emailInvalid, passwordValid);
+        softAssert.assertEquals(login.returningEmailValidationMessage.getText(), loginPageReturningEmailInvalidText);
 
+        login.loginWithCredentials(emailValidLogin, passwordDifferent);
+        softAssert.assertEquals(login.returningErrorMessage.getText(), loginPageReturningErrorMessageInvalidCredentials);
+
+        softAssert.assertAll();
+    }
+
+    @Test
+    public void loginPageForgotPasswordLayoutTest() {
+        LoginPage login = new LoginPage(driver);
+        ProductPage product = new ProductPage(driver);
+
+        clickElement(login.forgotPassword);
+
+        softAssert.assertEquals(product.pageTitle.getText(), passwordRecoveryTitle);
+        softAssert.assertEquals(login.passwordRecoveryDescription.getText(), passwordRecoveryDescription);
+
+        softAssert.assertTrue(isElementDisplayed(login.passwordRecoveryEmailInput));
+        softAssert.assertTrue(isElementDisplayed(login.passwordRecoveryRecoverButton));
+
+        softAssert.assertAll();
 
     }
+
+    @Test
+    public void LoginPagePasswordRecoveryHappyPathTest() {
+        LoginPage login = new LoginPage(driver);
+
+        navigateToPage(passwordRecoveryUrl);
+
+        enterText(login.passwordRecoveryEmailInput, emailValidLogin);
+        clickElement(login.passwordRecoveryRecoverButton);
+        softAssert.assertEquals(login.passwordRecoveryEmailSentMessage.getText(), passwordRecoveryEmailSentSuccessMessageText);
+
+        softAssert.assertAll();
+    }
+
+    @Test
+    public void LoginPagePasswordRecoveryNegativeTest() {
+        LoginPage login = new LoginPage(driver);
+
+        navigateToPage(passwordRecoveryUrl);
+
+        clickElement(login.passwordRecoveryRecoverButton);
+        softAssert.assertEquals(login.passwordRecoveryEmailValidationMessage.getText(), passwordRecoveryEnterEmailMessage);
+
+        enterText(login.passwordRecoveryEmailInput, emailInvalid);
+        softAssert.assertEquals(login.passwordRecoveryEmailValidationMessage.getText(), passwordRecoveryWrongEmailMessage);
+
+        softAssert.assertAll();
+    }
+
+
 }
