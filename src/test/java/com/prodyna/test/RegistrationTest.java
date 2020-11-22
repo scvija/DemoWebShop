@@ -54,7 +54,7 @@ public class RegistrationTest extends BaseTest {
         long timeStamp = System.currentTimeMillis();
         String mailAddressAndTime = timeStamp + emailConcat;
 
-        register.fillRegisterForm(firstName,lastName,mailAddressAndTime, password);
+        register.fillRegisterForm(firstName,lastName,mailAddressAndTime, passwordValid);
         clickElement(register.registerButton);
 
         softAssert.assertEquals(register.resultMessage.getText(), registrationComplete);
@@ -74,7 +74,7 @@ public class RegistrationTest extends BaseTest {
         clickElement(register.registerButton);
         softAssert.assertEquals(register.emailMandatoryText.getText(),emailWrongForm);
 
-        register.fillRegisterForm(firstName,lastName,emailLogin,password);
+        register.fillRegisterForm(firstName,lastName, emailValidLogin,passwordValid);
         clickElement(register.registerButton);
 
         softAssert.assertEquals(register.summaryErrorMessage.getText(),emailExists);
@@ -90,7 +90,7 @@ public class RegistrationTest extends BaseTest {
         clickElement(register.registerButton);
         softAssert.assertEquals(register.passwordMandatoryText.getText(),passwordTooShort);
 
-        enterText(register.passwordInput,password);
+        enterText(register.passwordInput,passwordValid);
         enterText(register.confirmedPasswordInput, passwordDifferent);
 
         clickElement(register.registerButton);
