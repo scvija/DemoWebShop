@@ -19,7 +19,7 @@ public class CategoriesMenu extends BaseTest {
 
     public CategoriesMenu(WebDriver driver) {
         this.driver = driver;
-        PageFactory.initElements(driver,this);
+        PageFactory.initElements(driver, this);
     }
 
     @FindBy(xpath = "//ul[@class='top-menu'] //a[@href='/books']")

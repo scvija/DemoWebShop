@@ -8,6 +8,7 @@ public class Constants {
     public static final String loginPageUrl = homepageUrl + "login";
     public static final String wishlistUrl = homepageUrl + "wishlist";
     public static final String searchUrl = homepageUrl + "search";
+    public static final String passwordRecoveryUrl = homepageUrl + "passwordrecovery";
 
     // REGISTER USER DATA
 
@@ -15,8 +16,8 @@ public class Constants {
     public static final String lastName = "Peterson";
     public static final String emailConcat = "peter.peterson@gmail.com";
     public static final String emailInvalid = firstName + lastName;
-    public static final String emailLogin = "peterpeterson@gmail.com";
-    public static final String password = "Test123!";
+    public static final String emailValidLogin = "peterpeterson@gmail.com";
+    public static final String passwordValid = "Test123!";
     public static final String passwordShort = "test";
     public static final String passwordDifferent = "!123Test";
 
@@ -95,6 +96,25 @@ public class Constants {
     public static final String searchPriceLow = "100";
 
     public static final String searchBookPartialDescription = "Worried about your health";
+
+    // LOGIN PAGE
+
+    public static final String loginPageNewCustomerTitle = "New Customer";
+    public static final String loginPageNewCustomerText = "By creating an account on our website you will be able to shop faster, be up to date on an orders status, and keep track of the orders you have previously made.";
+    public static final String loginPageReturningCustomerTitle = "New Customer";
+    public static final String loginPageAboutTitle = "About login / registration";
+    public static final String loginPageAboutDescription = "Put your login / registration information here. You can edit this in the admin site.";
+    public static final String loginPageReturningErrorMessageAccountNotFound = "Login was unsuccessful. Please correct the errors and try again.\n" + "No customer account found";
+    public static final String loginPageReturningErrorMessageInvalidCredentials = "Login was unsuccessful. Please correct the errors and try again.\n" + "The credentials provided are incorrect";
+    public static final String loginPageReturningEmailInvalidText = "Please enter a valid email address.";
+
+    // PASSWORD RECOVERY PAGE
+
+    public static final String passwordRecoveryTitle = "Password recovery";
+    public static final String passwordRecoveryDescription = "Please enter your email address below. You will receive a link to reset your password.";
+    public static final String passwordRecoveryWrongEmailMessage = "Wrong email";
+    public static final String passwordRecoveryEnterEmailMessage = "Enter your email";
+    public static final String passwordRecoveryEmailSentSuccessMessageText = "Email with instructions has been sent to you.";
 
 
 
