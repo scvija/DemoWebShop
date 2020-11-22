@@ -37,7 +37,7 @@ public class LoginPage {
     @FindBy(id = "RememberMe")
     public WebElement returningRememberMeCheckbox;
 
-    @FindBy(className = "forgot-password")
+    @FindBy(xpath = "//a[@href='/passwordrecovery']")
     public WebElement forgotPassword;
 
     @FindBy(xpath = "//input[@value='Log in']")
@@ -51,6 +51,21 @@ public class LoginPage {
 
     @FindBy(className = "message-error")
     public WebElement returningErrorMessage;
+
+    @FindBy(className = "tooltip")
+    public WebElement passwordRecoveryDescription;
+
+    @FindBy(id = "Email")
+    public WebElement passwordRecoveryEmailInput;
+
+    @FindBy(xpath = "//input[@value='Recover']")
+    public WebElement passwordRecoveryRecoverButton;
+
+    @FindBy(className = "result")
+    public WebElement passwordRecoveryEmailSentMessage;
+
+    @FindBy(xpath = "//span[@for='Email']")
+    public WebElement passwordRecoveryEmailValidationMessage;
 
     public void loginWithCredentials(String email, String password){
         returningEmailInput.clear();
