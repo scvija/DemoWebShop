@@ -14,37 +14,53 @@ public class LoginPage {
     }
 
     @FindBy(xpath = "//div[@class='new-wrapper register-block']//div[@class='title']")
-    WebElement newCustomerTitle;
+    public WebElement newCustomerTitle;
 
     @FindBy(xpath = "//div[@class='new-wrapper register-block']//div[@class='text']")
-    WebElement newCustomerText;
+    public WebElement newCustomerText;
 
-    @FindBy(className = "button-1 register-button")
-    WebElement newCustomerRegisterButton;
+    @FindBy(xpath = "//input[@value='Register']")
+    public WebElement newCustomerRegisterButton;
 
     @FindBy(xpath = "//div[@class='returning-wrapper']//div[@class='title']")
-    WebElement ReturningCustomerTitle;
+    public WebElement returningCustomerTitle;
 
     @FindBy(id = "Email")
-    WebElement returningEmailInput;
+    public WebElement returningEmailInput;
+
+    @FindBy(xpath = "//span[@data-valmsg-for='Email']")
+    public WebElement returningEmailValidationMessage;
 
     @FindBy(id = "Password")
-    WebElement returningPasswordInput;
+    public WebElement returningPasswordInput;
 
     @FindBy(id = "RememberMe")
-    WebElement rememberMeCheckbox;
+    public WebElement returningRememberMeCheckbox;
 
     @FindBy(className = "forgot-password")
-    WebElement forgotPassword;
+    public WebElement forgotPassword;
 
-    @FindBy(className = "button-1 login-button")
-    WebElement returningLoginButton;
+    @FindBy(xpath = "//input[@value='Log in']")
+    public WebElement returningLoginButton;
 
     @FindBy(className = "topic-html-content-header")
-    WebElement aboutLoginAndRegistrationTitle;
+    public WebElement aboutLoginAndRegistrationTitle;
 
     @FindBy(className = "topic-html-content-body")
-    WebElement aboutLoginAndRegistrationDescription;
+    public WebElement aboutLoginAndRegistrationDescription;
 
+    @FindBy(className = "message-error")
+    public WebElement returningErrorMessage;
+
+    public void loginWithCredentials(String email, String password){
+        returningEmailInput.clear();
+        returningEmailInput.sendKeys(email);
+
+        returningPasswordInput.clear();
+        returningPasswordInput.sendKeys(password);
+
+        returningLoginButton.click();
+
+    }
 
 }
