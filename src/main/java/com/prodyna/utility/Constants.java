@@ -117,6 +117,9 @@ public class Constants {
     public static final String passwordRecoveryEmailSentSuccessMessageText = "Email with instructions has been sent to you.";
 
 
+    public static final String titleLocator = "//div[@class='page-title']";
+
+
 
 
 }
