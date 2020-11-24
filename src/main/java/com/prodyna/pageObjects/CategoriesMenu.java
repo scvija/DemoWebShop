@@ -8,6 +8,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.asserts.SoftAssert;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -45,7 +46,20 @@ public class CategoriesMenu extends BaseTest {
 
     @FindBy(xpath = "//ul[@class='top-menu']/li")
     public List<WebElement> categoriesMenu;
-    
+
+    public List<WebElement> getCategoriesElements(){
+        List<WebElement> categoriesElements = new ArrayList<>();
+
+        categoriesElements.add(books);
+        categoriesElements.add(computers);
+        categoriesElements.add(electronics);
+        categoriesElements.add(apparelShoes);
+        categoriesElements.add(digitalDownloads);
+        categoriesElements.add(jewelry);
+        categoriesElements.add(giftCards);
+
+        return categoriesElements;
+    }
     
 
     
