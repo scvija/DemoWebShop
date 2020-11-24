@@ -7,7 +7,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import static com.prodyna.utility.Constants.*;
 
 public class ProductPage extends BaseTest {
     WebDriver driver;
@@ -18,7 +21,7 @@ public class ProductPage extends BaseTest {
     }
 
 
-    @FindBy(className = "page-title")
+    @FindBy(xpath = titleLocator)
     public WebElement pageTitle;
 
     @FindBy(id = "products-orderby")
@@ -60,6 +63,16 @@ public class ProductPage extends BaseTest {
         }
 
         return true;
+    }
+
+    public List<WebElement> getProductSelectors(){
+        List<WebElement> productSelectors = new ArrayList<>();
+
+        productSelectors.add(viewMode);
+        productSelectors.add(pageSize);
+        productSelectors.add(sortBy);
+
+        return productSelectors;
     }
 
 }
