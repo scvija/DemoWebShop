@@ -22,7 +22,7 @@ import static org.apache.commons.lang3.StringUtils.containsIgnoreCase;
 
 public class BaseTest {
     public WebDriver driver;
-    public SoftAssert softAssert = new SoftAssert();
+    public static SoftAssert softAssert = new SoftAssert();
 
     public WebDriver initializeDriver() throws IOException {
 
@@ -48,14 +48,6 @@ public class BaseTest {
         return driver;
     }
 
-    public String homepageUrl() throws IOException {
-
-        Properties prop = new Properties();
-        FileInputStream fis = new FileInputStream("src/main/java/com/prodyna/resources/data.properties");
-
-        prop.load(fis);
-        return prop.getProperty("homepage");
-    }
 
     public void enterText(WebElement element, String inputText){
         element.clear();
@@ -66,40 +58,50 @@ public class BaseTest {
         return element.isDisplayed();
     }
 
-    public void clickElement(WebElement element){
+    public void clickElement(WebElement element) {
         element.click();
     }
 
-    public void navigateToPage(String page){
+    public void navigateToPage(String page) {
         driver.get(page);
     }
 
-    public boolean areElementsDisplayed(List<WebElement> list) {
-        boolean isDisplayed = false;
+    public void areElementsDisplayed(WebElement... list) {
         for (WebElement element : list) {
-           isDisplayed = element.isDisplayed();
+            softAssert.assertTrue(element.isDisplayed());
         }
-    return isDisplayed;
+
+        softAssert.assertAll();
     }
 
-    public boolean compareWithExpected(String actualText,String expectedText){
-        return actualText.equalsIgnoreCase(expectedText);
+    public void areElementsDisplayed(List<WebElement> list) {
+        for (WebElement element : list) {
+            softAssert.assertTrue(elementNotFound(element), element + " element not found");
+        }
+
+        softAssert.assertAll();
     }
 
-    public void selectValueInField(WebElement element, String value){
+
+    public boolean compareWithExpected(WebElement element, String expectedText) {
+        String elementText = element.getText();
+        return elementText.equalsIgnoreCase(expectedText);
+    }
+
+    public void selectValueInField(WebElement element, String value) {
         Select selector = new Select(element);
         selector.selectByVisibleText(value);
     }
 
     public boolean elementNotFound(WebElement element) {
 
-        boolean isNextpageDisplayed = false;
+        boolean isElementDisplayedValue;
         try {
-            isNextpageDisplayed = isElementDisplayed(element);
+            isElementDisplayedValue = isElementDisplayed(element);
         } catch (org.openqa.selenium.NoSuchElementException ex) {
-            isNextpageDisplayed = true;
+            isElementDisplayedValue = false;
         }
-        return isNextpageDisplayed;
+        return isElementDisplayedValue;
     }
 
     public int countElementsUsingLocator(By locator) {
@@ -123,8 +125,7 @@ public class BaseTest {
     public void startHeaderSearch(String text) {
         Search search = new Search(driver);
 
-        search.headerSearch.clear();
-        search.headerSearch.sendKeys(text);
+        enterText(search.headerSearchButton, text);
 
         search.headerSearchButton.click();
     }
