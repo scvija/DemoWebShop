@@ -16,7 +16,6 @@ public class SearchTest extends BaseTest {
     @BeforeMethod
     public void initialize() throws IOException {
         driver = initializeDriver();
-        navigateToPage(searchUrl);
     }
 
     @AfterMethod
@@ -28,6 +27,8 @@ public class SearchTest extends BaseTest {
     public void headerSearchTestLayout() {
         Search search = new Search(driver);
         ProductPage products = new ProductPage(driver);
+
+        navigateToPage(searchUrl);
 
         softAssert.assertTrue(isElementDisplayed(search.headerSearch));
         softAssert.assertTrue(isElementDisplayed(search.headerSearchButton));
@@ -45,6 +46,7 @@ public class SearchTest extends BaseTest {
         Search search = new Search(driver);
         ProductPage products = new ProductPage(driver);
 
+        navigateToPage(searchUrl);
 
         enterText(search.headerSearch, searchShort);
         clickElement(search.headerSearchButton);
@@ -62,6 +64,8 @@ public class SearchTest extends BaseTest {
     public void headerSearchAutocomplete() {
         Search search = new Search(driver);
         ProductPage products = new ProductPage(driver);
+
+        navigateToPage(searchUrl);
 
         enterText(search.headerSearch, searchPartialValid);
 
@@ -82,6 +86,8 @@ public class SearchTest extends BaseTest {
     public void headerSearchInvalid() {
         Search search = new Search(driver);
 
+        navigateToPage(searchUrl);
+
         enterText(search.headerSearch, searchInvalid);
         softAssert.assertFalse(search.headerSearchAutocompleteDialogue.isDisplayed());
 
@@ -99,6 +105,8 @@ public class SearchTest extends BaseTest {
         Search search = new Search(driver);
         ProductPage products = new ProductPage(driver);
 
+        navigateToPage(searchUrl);
+
         enterText(search.headerSearch, searchPartialValid);
 
         clickElement(search.headerSearchButton);
@@ -113,6 +121,8 @@ public class SearchTest extends BaseTest {
     @Test
     public void advancedSearchLayout() {
         Search search = new Search(driver);
+
+        navigateToPage(searchUrl);
 
         softAssert.assertTrue(isElementDisplayed(search.advancedSearchFieldLabel));
         softAssert.assertTrue(isElementDisplayed(search.advancedSearchFieldInput));
@@ -147,6 +157,8 @@ public class SearchTest extends BaseTest {
     public void advancedSearchNegativeTest() {
         Search search = new Search(driver);
 
+        navigateToPage(searchUrl);
+
         search.startAdvancedSearch(searchShort);
 
         softAssert.assertEquals(search.warning.getText(), minSearchLength);
@@ -161,6 +173,8 @@ public class SearchTest extends BaseTest {
     public void advancedSearchIgnoreCaseTest() {
         Search search = new Search(driver);
         ProductPage products = new ProductPage(driver);
+
+        navigateToPage(searchUrl);
 
         search.startAdvancedSearch(computerCapital);
         int countWithCapital = countElementsUsingLocator(products.product);
@@ -178,6 +192,8 @@ public class SearchTest extends BaseTest {
     public void advancedSearchProductInDifferentCategoryTest() {
         Search search = new Search(driver);
         ProductPage products = new ProductPage(driver);
+
+        navigateToPage(searchUrl);
 
         clickElement(search.advancedSearchCheckbox);
 
@@ -198,6 +214,8 @@ public class SearchTest extends BaseTest {
     public void advancedSearchProductInSubCategoryTest() {
         Search search = new Search(driver);
         ProductPage products = new ProductPage(driver);
+
+        navigateToPage(searchUrl);
 
         clickElement(search.advancedSearchCheckbox);
 
@@ -221,6 +239,8 @@ public class SearchTest extends BaseTest {
         Search search = new Search(driver);
         ProductPage products = new ProductPage(driver);
 
+        navigateToPage(searchUrl);
+
         clickElement(search.advancedSearchCheckbox);
 
         selectValueInField(search.manufacturerDropdown, searchManufacturerTricentis);
@@ -240,6 +260,8 @@ public class SearchTest extends BaseTest {
     public void advancedSearchFromPriceTest() {
         Search search = new Search(driver);
         ProductPage products = new ProductPage(driver);
+
+        navigateToPage(searchUrl);
 
         clickElement(search.advancedSearchCheckbox);
 
@@ -266,6 +288,8 @@ public class SearchTest extends BaseTest {
     public void advancedSearchToPriceTest() {
         Search search = new Search(driver);
         ProductPage products = new ProductPage(driver);
+
+        navigateToPage(searchUrl);
 
         clickElement(search.advancedSearchCheckbox);
 
@@ -294,6 +318,8 @@ public class SearchTest extends BaseTest {
         Search search = new Search(driver);
         ProductPage products = new ProductPage(driver);
 
+        navigateToPage(searchUrl);
+
         clickElement(search.advancedSearchCheckbox);
 
         search.startAdvancedSearch(searchBookPartialDescription);
@@ -309,7 +335,6 @@ public class SearchTest extends BaseTest {
         clickElement(products.productTileTitle);
 
         softAssert.assertTrue(textContainsIgnoreCase(products.productShortDescription.getText(), searchBookPartialDescription), "The text is not contained in the product description");
-
 
         softAssert.assertAll();
     }

@@ -18,7 +18,6 @@ public class LoginTest extends BaseTest {
     @BeforeMethod
     public void initialize() throws IOException {
         driver = initializeDriver();
-        navigateToPage(loginPageUrl);
     }
 
     @AfterMethod
@@ -31,6 +30,8 @@ public class LoginTest extends BaseTest {
         Header header = new Header(driver);
         LoginPage login = new LoginPage(driver);
         ProductPage products = new ProductPage(driver);
+
+        navigateToPage(loginPageUrl);
 
         clickElement(header.login);
         softAssert.assertTrue(isElementDisplayed(products.pageTitle));
@@ -57,6 +58,9 @@ public class LoginTest extends BaseTest {
         LoginPage login = new LoginPage(driver);
         ProductPage products = new ProductPage(driver);
 
+        navigateToPage(loginPageUrl);
+
+
         clickElement(login.newCustomerRegisterButton);
         softAssert.assertEquals(products.pageTitle.getText(), "Register");
 
@@ -68,6 +72,8 @@ public class LoginTest extends BaseTest {
     public void loginPageLoginHappyPathTest(){
         LoginPage login = new LoginPage(driver);
         Header header = new Header(driver);
+
+        navigateToPage(loginPageUrl);
 
         // TODO loginmethod? where to store
 
@@ -81,6 +87,8 @@ public class LoginTest extends BaseTest {
     @Test
     public void loginPageLoginNegativeTest(){
         LoginPage login = new LoginPage(driver);
+
+        navigateToPage(loginPageUrl);
 
         clickElement(login.returningLoginButton);
         softAssert.assertEquals(login.returningErrorMessage.getText(), loginPageReturningErrorMessageAccountNotFound);
@@ -98,6 +106,8 @@ public class LoginTest extends BaseTest {
     public void loginPageForgotPasswordLayoutTest() {
         LoginPage login = new LoginPage(driver);
         ProductPage product = new ProductPage(driver);
+
+        navigateToPage(loginPageUrl);
 
         clickElement(login.forgotPassword);
 

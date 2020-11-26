@@ -12,10 +12,10 @@ import java.io.IOException;
 import static com.prodyna.utility.Constants.*;
 
 public class RegistrationTest extends BaseTest {
+
     @BeforeMethod
     public void initialize() throws IOException {
         driver = initializeDriver();
-        navigateToPage(registerPageUrl);
     }
 
     @AfterMethod
@@ -28,6 +28,8 @@ public class RegistrationTest extends BaseTest {
 
         RegisterPage register = new RegisterPage(driver);
 
+        navigateToPage(registerPageUrl);
+
         // trouble with the loop inside the method
         register.verifyRegistrationFormFieldsAreDisplayed();
 
@@ -39,6 +41,8 @@ public class RegistrationTest extends BaseTest {
     public void registerMandatoryText() {
         RegisterPage register = new RegisterPage(driver);
 
+        navigateToPage(registerPageUrl);
+
         clickElement(register.registerButton);
         register.verifyRegistrationFormMandatoryText();
 
@@ -48,6 +52,8 @@ public class RegistrationTest extends BaseTest {
     public void registerFunctionalityHappyPathTest() {
         Header header = new Header(driver);
         RegisterPage register = new RegisterPage(driver);
+
+        navigateToPage(registerPageUrl);
 
         clickElement(register.registerButton);
 
@@ -70,6 +76,8 @@ public class RegistrationTest extends BaseTest {
     public void emailInputNegativeTest(){
         RegisterPage register = new RegisterPage(driver);
 
+        navigateToPage(registerPageUrl);
+
         enterText(register.emailInput, emailInvalid);
         clickElement(register.registerButton);
         softAssert.assertEquals(register.emailMandatoryText.getText(),emailWrongForm);
@@ -85,6 +93,8 @@ public class RegistrationTest extends BaseTest {
     @Test
     public void passwordInputNegativeTest(){
         RegisterPage register = new RegisterPage(driver);
+
+        navigateToPage(registerPageUrl);
 
         enterText(register.passwordInput, passwordShort);
         clickElement(register.registerButton);
