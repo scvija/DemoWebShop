@@ -30,7 +30,7 @@ public class CategoriesTest extends BaseTest {
 
         navigateToPage(homepageUrl);
         // not sure if good
-        areElementsDisplayed(categories.getCategoriesElements());
+        verifyElementsAreDisplayed(categories.getCategoriesElements());
     }
 
     @Test
@@ -59,7 +59,7 @@ public class CategoriesTest extends BaseTest {
         navigateToPage(homepageUrl);
 
         clickElement(categories.apparelShoes);
-        areElementsDisplayed(products.getProductSelectors());
+        verifyElementsAreDisplayed(products.getProductSelectors());
         softAssert.assertTrue(isElementDisplayed(products.nextPage));
 
         //could do it with a look, where to store it? point 12.
@@ -73,8 +73,7 @@ public class CategoriesTest extends BaseTest {
         selectValueInField(products.pageSize, display12);
         softAssert.assertEquals(countElementsUsingLocator(products.product), 12);
 
-        // TODO check the method, not entering catch
-//       softAssert.assertTrue(elementNotFound(products.nextPage));
+        softAssert.assertFalse(isElementDisplayed(products.nextPage));
 
 
         softAssert.assertAll();
