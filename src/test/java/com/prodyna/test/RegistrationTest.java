@@ -3,6 +3,8 @@ package com.prodyna.test;
 import com.prodyna.configuration.BaseTestConfiguration;
 import com.prodyna.pageObjects.Header;
 import com.prodyna.pageObjects.RegisterPage;
+import com.prodyna.services.RegistrationService;
+import com.prodyna.services.SeleniumService;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -15,13 +17,14 @@ public class RegistrationTest extends BaseTestConfiguration {
 
     @Test
     public void registerPageLayoutTest() {
-
+        SeleniumService seleniumService = new SeleniumService(driver);
         RegisterPage register = new RegisterPage(driver);
+        RegistrationService registrationService = new RegistrationService(driver);
 
-        navigateToPage(registerPageUrl);
+        seleniumService.navigateToPage(registerPageUrl);
 
         // trouble with the loop inside the method
-        register.verifyRegistrationFormFieldsAreDisplayed();
+        registrationService.verifyRegistrationFormFieldsAreDisplayed();
 
         softAssert.assertAll();
 
@@ -29,32 +32,36 @@ public class RegistrationTest extends BaseTestConfiguration {
 
     @Test
     public void registerMandatoryText() {
+        SeleniumService seleniumService = new SeleniumService(driver);
         RegisterPage register = new RegisterPage(driver);
+        RegistrationService registrationService = new RegistrationService(driver);
 
-        navigateToPage(registerPageUrl);
+        seleniumService.navigateToPage(registerPageUrl);
 
-        clickElement(register.registerButton);
-        register.verifyRegistrationFormMandatoryText();
+        seleniumService.clickElement(register.registerButton);
+        registrationService.verifyRegistrationFormMandatoryText();
 
     }
 
     @Test
     public void registerFunctionalityHappyPathTest() {
+        SeleniumService seleniumService = new SeleniumService(driver);
         Header header = new Header(driver);
         RegisterPage register = new RegisterPage(driver);
+        RegistrationService registrationService = new RegistrationService(driver);
 
-        navigateToPage(registerPageUrl);
+        seleniumService.navigateToPage(registerPageUrl);
 
-        clickElement(register.registerButton);
+        seleniumService.clickElement(register.registerButton);
 
         long timeStamp = System.currentTimeMillis();
         String mailAddressAndTime = timeStamp + emailConcat;
 
-        register.fillRegisterForm(firstName,lastName,mailAddressAndTime, passwordValid);
-        clickElement(register.registerButton);
+        registrationService.fillRegisterForm(firstName,lastName,mailAddressAndTime, passwordValid);
+        seleniumService.clickElement(register.registerButton);
 
         softAssert.assertEquals(register.resultMessage.getText(), registrationComplete);
-        clickElement(register.continueButton);
+        seleniumService.clickElement(register.continueButton);
 
         String myAccountText = header.myAccount.getText();
         softAssert.assertEquals(myAccountText, mailAddressAndTime);
@@ -64,16 +71,18 @@ public class RegistrationTest extends BaseTestConfiguration {
 
     @Test
     public void emailInputNegativeTest(){
+        SeleniumService seleniumService = new SeleniumService(driver);
         RegisterPage register = new RegisterPage(driver);
+        RegistrationService registrationService = new RegistrationService(driver);
 
-        navigateToPage(registerPageUrl);
+        seleniumService.navigateToPage(registerPageUrl);
 
-        enterText(register.emailInput, emailInvalid);
-        clickElement(register.registerButton);
+        seleniumService.enterText(register.emailInput, emailInvalid);
+        seleniumService.clickElement(register.registerButton);
         softAssert.assertEquals(register.emailMandatoryText.getText(),emailWrongForm);
 
-        register.fillRegisterForm(firstName,lastName, emailValidLogin,passwordValid);
-        clickElement(register.registerButton);
+        registrationService.fillRegisterForm(firstName,lastName, emailValidLogin,passwordValid);
+        seleniumService.clickElement(register.registerButton);
 
         softAssert.assertEquals(register.summaryErrorMessage.getText(),emailExists);
 
@@ -82,18 +91,19 @@ public class RegistrationTest extends BaseTestConfiguration {
 
     @Test
     public void passwordInputNegativeTest(){
+        SeleniumService seleniumService = new SeleniumService(driver);
         RegisterPage register = new RegisterPage(driver);
 
-        navigateToPage(registerPageUrl);
+        seleniumService.navigateToPage(registerPageUrl);
 
-        enterText(register.passwordInput, passwordShort);
-        clickElement(register.registerButton);
+        seleniumService.enterText(register.passwordInput, passwordShort);
+        seleniumService.clickElement(register.registerButton);
         softAssert.assertEquals(register.passwordMandatoryText.getText(),passwordTooShort);
 
-        enterText(register.passwordInput,passwordValid);
-        enterText(register.confirmedPasswordInput, passwordDifferent);
+        seleniumService.enterText(register.passwordInput,passwordValid);
+        seleniumService.enterText(register.confirmedPasswordInput, passwordDifferent);
 
-        clickElement(register.registerButton);
+        seleniumService.clickElement(register.registerButton);
         softAssert.assertEquals(register.confirmPasswordMandatoryText.getText(),passwordMissmatch);
 
         softAssert.assertAll();

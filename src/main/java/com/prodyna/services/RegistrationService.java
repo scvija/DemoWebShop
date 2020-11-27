@@ -1,7 +1,6 @@
 package com.prodyna.services;
 
 import com.prodyna.pageObjects.RegisterPage;
-import jdk.vm.ci.code.Register;
 import org.openqa.selenium.WebDriver;
 
 public class RegistrationService extends  SeleniumService{
