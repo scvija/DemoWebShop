@@ -1,6 +1,6 @@
 package com.prodyna.pageObjects;
 
-import com.prodyna.configuration.BaseTest;
+import com.prodyna.configuration.BaseTestConfiguration;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -12,7 +12,7 @@ import java.util.List;
 
 import static com.prodyna.utility.Constants.*;
 
-public class ProductPage extends BaseTest {
+public class ProductPage extends BaseTestConfiguration {
     WebDriver driver;
 
     public ProductPage(WebDriver driver) {

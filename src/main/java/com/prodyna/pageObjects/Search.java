@@ -1,6 +1,6 @@
 package com.prodyna.pageObjects;
 
-import com.prodyna.configuration.BaseTest;
+import com.prodyna.configuration.BaseTestConfiguration;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -8,7 +8,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.asserts.SoftAssert;
 
-public class Search extends BaseTest {
+public class Search extends BaseTestConfiguration {
     public WebDriver driver;
     public SoftAssert softAssert = new SoftAssert();
     public WebDriverWait wait;

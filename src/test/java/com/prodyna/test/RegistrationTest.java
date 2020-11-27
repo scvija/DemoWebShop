@@ -1,6 +1,6 @@
 package com.prodyna.test;
 
-import com.prodyna.configuration.BaseTest;
+import com.prodyna.configuration.BaseTestConfiguration;
 import com.prodyna.pageObjects.Header;
 import com.prodyna.pageObjects.RegisterPage;
 import org.testng.annotations.AfterMethod;
@@ -11,7 +11,7 @@ import java.io.IOException;
 
 import static com.prodyna.utility.Constants.*;
 
-public class RegistrationTest extends BaseTest {
+public class RegistrationTest extends BaseTestConfiguration {
 
     @BeforeMethod
     public void initialize() throws IOException {

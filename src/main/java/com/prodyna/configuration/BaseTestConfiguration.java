@@ -22,7 +22,7 @@ import java.util.concurrent.TimeUnit;
 
 import static org.apache.commons.lang3.StringUtils.containsIgnoreCase;
 
-public class BaseTest {
+public class BaseTestConfiguration {
     public WebDriver driver;
     public static SoftAssert softAssert = new SoftAssert();
 

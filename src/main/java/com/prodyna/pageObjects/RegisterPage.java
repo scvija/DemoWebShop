@@ -1,6 +1,6 @@
 package com.prodyna.pageObjects;
 
-import com.prodyna.configuration.BaseTest;
+import com.prodyna.configuration.BaseTestConfiguration;
 import lombok.Data;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -11,7 +11,7 @@ import org.testng.asserts.SoftAssert;
 import java.util.List;
 
 @Data
-public class RegisterPage extends BaseTest {
+public class RegisterPage extends BaseTestConfiguration {
 
     public WebDriver driver;
     public SoftAssert softAssert = new SoftAssert();

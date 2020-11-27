@@ -1,26 +1,21 @@
 package com.prodyna.pageObjects;
 
-import com.prodyna.configuration.BaseTest;
-import lombok.Data;
+import com.prodyna.configuration.BasePageConfiguration;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import org.testng.asserts.SoftAssert;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Data
-public class CategoriesMenu extends BaseTest {
+public class CategoriesMenu extends BasePageConfiguration {
 
     public WebDriver driver;
     public SoftAssert softAssert = new SoftAssert();
 
-
     public CategoriesMenu(WebDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
+        super(driver);
     }
 
     @FindBy(xpath = "//ul[@class='top-menu'] //a[@href='/books']")
@@ -46,6 +41,8 @@ public class CategoriesMenu extends BaseTest {
 
     @FindBy(xpath = "//ul[@class='top-menu']/li")
     public List<WebElement> categoriesMenu;
+
+
 
     public List<WebElement> getCategoriesElements(){
         List<WebElement> categoriesElements = new ArrayList<>();

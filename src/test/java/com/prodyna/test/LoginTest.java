@@ -1,6 +1,6 @@
 package com.prodyna.test;
 
-import com.prodyna.configuration.BaseTest;
+import com.prodyna.configuration.BaseTestConfiguration;
 import com.prodyna.pageObjects.Header;
 import com.prodyna.pageObjects.LoginPage;
 import com.prodyna.pageObjects.ProductPage;
@@ -12,7 +12,7 @@ import java.io.IOException;
 
 import static com.prodyna.utility.Constants.*;
 
-public class LoginTest extends BaseTest {
+public class LoginTest extends BaseTestConfiguration {
 
 
     @BeforeMethod

@@ -1,6 +1,6 @@
 package com.prodyna.test;
 
-import com.prodyna.configuration.BaseTest;
+import com.prodyna.configuration.BaseTestConfiguration;
 import com.prodyna.pageObjects.CategoriesMenu;
 import com.prodyna.pageObjects.ProductPage;
 import org.testng.annotations.AfterMethod;
@@ -11,7 +11,7 @@ import java.io.IOException;
 
 import static com.prodyna.utility.Constants.*;
 
-public class CategoriesTest extends BaseTest {
+public class CategoriesTest extends BaseTestConfiguration {
 
     @BeforeMethod
     public void initialize() throws IOException {
