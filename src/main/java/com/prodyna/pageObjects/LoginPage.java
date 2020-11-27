@@ -1,16 +1,18 @@
 package com.prodyna.pageObjects;
 
+import com.prodyna.configuration.BasePageConfiguration;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class LoginPage {
+import static com.prodyna.utility.Constants.titleLocator;
+
+public class LoginPage extends BasePageConfiguration {
     public WebDriver driver;
 
     public LoginPage(WebDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
+        super(driver);
     }
 
     @FindBy(xpath = "//div[@class='new-wrapper register-block']//div[@class='title']")
@@ -67,15 +69,8 @@ public class LoginPage {
     @FindBy(xpath = "//span[@for='Email']")
     public WebElement passwordRecoveryEmailValidationMessage;
 
-    public void loginWithCredentials(String email, String password){
-        returningEmailInput.clear();
-        returningEmailInput.sendKeys(email);
+    @FindBy(xpath = titleLocator)
+    public WebElement pageTitle;
 
-        returningPasswordInput.clear();
-        returningPasswordInput.sendKeys(password);
-
-        returningLoginButton.click();
-
-    }
 
 }

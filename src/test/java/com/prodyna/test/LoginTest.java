@@ -4,6 +4,9 @@ import com.prodyna.configuration.BaseTestConfiguration;
 import com.prodyna.pageObjects.Header;
 import com.prodyna.pageObjects.LoginPage;
 import com.prodyna.pageObjects.ProductPage;
+import com.prodyna.services.LoginService;
+import com.prodyna.services.SeleniumService;
+import org.openqa.selenium.support.ui.Select;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -14,55 +17,29 @@ import static com.prodyna.utility.Constants.*;
 
 public class LoginTest extends BaseTestConfiguration {
 
-
-    @BeforeMethod
-    public void initialize() throws IOException {
-        driver = initializeDriver();
-    }
-
-    @AfterMethod
-    public void closeBrowser() {
-        driver.close();
-    }
-
     @Test
     public void loginPageLayout(){
+        SeleniumService seleniumService = new SeleniumService(driver);
         Header header = new Header(driver);
         LoginPage login = new LoginPage(driver);
-        ProductPage products = new ProductPage(driver);
+        LoginService loginService = new LoginService(driver);
 
-        navigateToPage(loginPageUrl);
+        seleniumService.navigateToPage(loginPageUrl);
 
-        clickElement(header.login);
-        softAssert.assertTrue(isElementDisplayed(products.pageTitle));
+        seleniumService.clickElement(header.login);
 
-        softAssert.assertTrue(isElementDisplayed(login.newCustomerTitle));
-        softAssert.assertTrue(isElementDisplayed(login.newCustomerText));
-        softAssert.assertTrue(isElementDisplayed(login.newCustomerRegisterButton));
-
-        softAssert.assertTrue(isElementDisplayed(login.returningCustomerTitle));
-        softAssert.assertTrue(isElementDisplayed(login.returningCustomerTitle));
-        softAssert.assertTrue(isElementDisplayed(login.returningPasswordInput));
-        softAssert.assertTrue(isElementDisplayed(login.returningRememberMeCheckbox));
-        softAssert.assertTrue(isElementDisplayed(login.returningCustomerTitle));
-        softAssert.assertTrue(isElementDisplayed(login.returningLoginButton));
-
-        softAssert.assertTrue(isElementDisplayed(login.aboutLoginAndRegistrationTitle));
-        softAssert.assertTrue(isElementDisplayed(login.aboutLoginAndRegistrationDescription));
-
-        softAssert.assertAll();
+        loginService.verifyLoginElementsAreDisplayed();
     }
 
     @Test
     public void loginPageRegisterButtonTest(){
+        SeleniumService seleniumService = new SeleniumService(driver);
         LoginPage login = new LoginPage(driver);
-        ProductPage products = new ProductPage(driver);
 
-        navigateToPage(loginPageUrl);
+        seleniumService.navigateToPage(loginPageUrl);
 
-
-        clickElement(login.newCustomerRegisterButton);
-        softAssert.assertEquals(products.pageTitle.getText(), "Register");
+        seleniumService.clickElement(login.newCustomerRegisterButton);
+        softAssert.assertEquals(login.pageTitle.getText(), "Register");
 
         softAssert.assertAll();
     }
@@ -70,15 +47,17 @@ public class LoginTest extends BaseTestConfiguration {
 
     @Test
     public void loginPageLoginHappyPathTest(){
+        SeleniumService seleniumService = new SeleniumService(driver);
         LoginPage login = new LoginPage(driver);
+        LoginService loginService = new LoginService(driver);
         Header header = new Header(driver);
 
         navigateToPage(loginPageUrl);
 
         // TODO loginmethod? where to store
 
-        login.loginWithCredentials(emailValidLogin, passwordValid);
-        softAssert.assertEquals(header.myAccount.getText(), emailValidLogin);
+        loginService.loginWithCredentials(emailValidLogin, passwordValid);
+        softAssert.assertTrue(seleniumService.compareElementTextWithExpected(header.myAccount, emailValidLogin));
 
         softAssert.assertAll();
     }
@@ -86,17 +65,19 @@ public class LoginTest extends BaseTestConfiguration {
 
     @Test
     public void loginPageLoginNegativeTest(){
+        SeleniumService seleniumService = new SeleniumService(driver);
         LoginPage login = new LoginPage(driver);
+        LoginService loginService = new LoginService(driver);
 
-        navigateToPage(loginPageUrl);
+        seleniumService.navigateToPage(loginPageUrl);
 
-        clickElement(login.returningLoginButton);
+        seleniumService.clickElement(login.returningLoginButton);
         softAssert.assertEquals(login.returningErrorMessage.getText(), loginPageReturningErrorMessageAccountNotFound);
 
-        login.loginWithCredentials(emailInvalid, passwordValid);
+        loginService.loginWithCredentials(emailInvalid, passwordValid);
         softAssert.assertEquals(login.returningEmailValidationMessage.getText(), loginPageReturningEmailInvalidText);
 
-        login.loginWithCredentials(emailValidLogin, passwordDifferent);
+        loginService.loginWithCredentials(emailValidLogin, passwordDifferent);
         softAssert.assertEquals(login.returningErrorMessage.getText(), loginPageReturningErrorMessageInvalidCredentials);
 
         softAssert.assertAll();
@@ -104,18 +85,19 @@ public class LoginTest extends BaseTestConfiguration {
 
     @Test
     public void loginPageForgotPasswordLayoutTest() {
+        SeleniumService seleniumService = new SeleniumService(driver);
         LoginPage login = new LoginPage(driver);
         ProductPage product = new ProductPage(driver);
 
-        navigateToPage(loginPageUrl);
+        seleniumService.navigateToPage(loginPageUrl);
 
-        clickElement(login.forgotPassword);
+        seleniumService.clickElement(login.forgotPassword);
 
-        softAssert.assertEquals(product.pageTitle.getText(), passwordRecoveryTitle);
+        softAssert.assertEquals(login.pageTitle.getText(), passwordRecoveryTitle);
         softAssert.assertEquals(login.passwordRecoveryDescription.getText(), passwordRecoveryDescription);
 
-        softAssert.assertTrue(isElementDisplayed(login.passwordRecoveryEmailInput));
-        softAssert.assertTrue(isElementDisplayed(login.passwordRecoveryRecoverButton));
+        softAssert.assertTrue(seleniumService.isElementDisplayed(login.passwordRecoveryEmailInput));
+        softAssert.assertTrue(seleniumService.isElementDisplayed(login.passwordRecoveryRecoverButton));
 
         softAssert.assertAll();
 
@@ -123,12 +105,13 @@ public class LoginTest extends BaseTestConfiguration {
 
     @Test
     public void LoginPagePasswordRecoveryHappyPathTest() {
+        SeleniumService seleniumService = new SeleniumService(driver);
         LoginPage login = new LoginPage(driver);
 
         navigateToPage(passwordRecoveryUrl);
 
-        enterText(login.passwordRecoveryEmailInput, emailValidLogin);
-        clickElement(login.passwordRecoveryRecoverButton);
+        seleniumService.enterText(login.passwordRecoveryEmailInput, emailValidLogin);
+        seleniumService.clickElement(login.passwordRecoveryRecoverButton);
         softAssert.assertEquals(login.passwordRecoveryEmailSentMessage.getText(), passwordRecoveryEmailSentSuccessMessageText);
 
         softAssert.assertAll();
@@ -136,14 +119,15 @@ public class LoginTest extends BaseTestConfiguration {
 
     @Test
     public void LoginPagePasswordRecoveryNegativeTest() {
+        SeleniumService seleniumService = new SeleniumService(driver);
         LoginPage login = new LoginPage(driver);
 
-        navigateToPage(passwordRecoveryUrl);
+        seleniumService.navigateToPage(passwordRecoveryUrl);
 
-        clickElement(login.passwordRecoveryRecoverButton);
+        seleniumService.clickElement(login.passwordRecoveryRecoverButton);
         softAssert.assertEquals(login.passwordRecoveryEmailValidationMessage.getText(), passwordRecoveryEnterEmailMessage);
 
-        enterText(login.passwordRecoveryEmailInput, emailInvalid);
+        seleniumService.enterText(login.passwordRecoveryEmailInput, emailInvalid);
         softAssert.assertEquals(login.passwordRecoveryEmailValidationMessage.getText(), passwordRecoveryWrongEmailMessage);
 
         softAssert.assertAll();
