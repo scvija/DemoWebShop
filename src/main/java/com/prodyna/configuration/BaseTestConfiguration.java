@@ -10,6 +10,8 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.asserts.SoftAssert;
 
 import java.io.FileInputStream;
@@ -23,6 +25,16 @@ import static org.apache.commons.lang3.StringUtils.containsIgnoreCase;
 public class BaseTest {
     public WebDriver driver;
     public static SoftAssert softAssert = new SoftAssert();
+
+    @BeforeMethod
+    public void initialize() throws IOException {
+        driver = initializeDriver();
+    }
+
+    @AfterMethod
+    public void closeBrowser() {
+        driver.close();
+    }
 
     public WebDriver initializeDriver() throws IOException {
 
@@ -49,14 +61,12 @@ public class BaseTest {
     }
 
 
+
     public void enterText(WebElement element, String inputText){
         element.clear();
         element.sendKeys(inputText);
     }
 
-    public boolean isElementDisplayed(WebElement element){
-        return element.isDisplayed();
-    }
 
     public void clickElement(WebElement element) {
         element.click();
@@ -66,7 +76,7 @@ public class BaseTest {
         driver.get(page);
     }
 
-    public void areElementsDisplayed(WebElement... list) {
+    public void verifyElementsAreDisplayed(WebElement... list) {
         for (WebElement element : list) {
             softAssert.assertTrue(element.isDisplayed());
         }
@@ -74,9 +84,9 @@ public class BaseTest {
         softAssert.assertAll();
     }
 
-    public void areElementsDisplayed(List<WebElement> list) {
+    public void verifyElementsAreDisplayed(List<WebElement> list) {
         for (WebElement element : list) {
-            softAssert.assertTrue(elementNotFound(element), element + " element not found");
+            softAssert.assertTrue(isElementDisplayed(element), element + " element not found");
         }
 
         softAssert.assertAll();
@@ -93,11 +103,11 @@ public class BaseTest {
         selector.selectByVisibleText(value);
     }
 
-    public boolean elementNotFound(WebElement element) {
+    public boolean isElementDisplayed(WebElement element) {
 
         boolean isElementDisplayedValue;
         try {
-            isElementDisplayedValue = isElementDisplayed(element);
+            isElementDisplayedValue = element.isDisplayed();
         } catch (org.openqa.selenium.NoSuchElementException ex) {
             isElementDisplayedValue = false;
         }
