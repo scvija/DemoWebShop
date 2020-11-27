@@ -13,16 +13,6 @@ import static com.prodyna.utility.Constants.*;
 
 public class RegistrationTest extends BaseTestConfiguration {
 
-    @BeforeMethod
-    public void initialize() throws IOException {
-        driver = initializeDriver();
-    }
-
-    @AfterMethod
-    public void closeBrowser() {
-        driver.close();
-    }
-
     @Test
     public void registerPageLayoutTest() {
 
