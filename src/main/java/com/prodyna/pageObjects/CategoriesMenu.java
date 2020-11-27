@@ -12,7 +12,6 @@ import java.util.List;
 public class CategoriesMenu extends BasePageConfiguration {
 
     public WebDriver driver;
-    public SoftAssert softAssert = new SoftAssert();
 
     public CategoriesMenu(WebDriver driver) {
         super(driver);
