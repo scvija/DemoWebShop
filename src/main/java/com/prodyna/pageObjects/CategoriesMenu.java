@@ -43,7 +43,6 @@ public class CategoriesMenu extends BasePageConfiguration {
     public List<WebElement> categoriesMenu;
 
 
-
     public List<WebElement> getCategoriesElements(){
         List<WebElement> categoriesElements = new ArrayList<>();
 

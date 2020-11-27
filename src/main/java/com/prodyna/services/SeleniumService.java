@@ -51,7 +51,7 @@ public class SeleniumService {
     }
 
 
-    public boolean compareWithExpected(WebElement element, String expectedText) {
+    public boolean compareElementTextWithExpected(WebElement element, String expectedText) {
         String elementText = element.getText();
         return elementText.equalsIgnoreCase(expectedText);
     }
@@ -89,5 +89,7 @@ public class SeleniumService {
     public boolean textContainsIgnoreCase(String containing, String toBeContained) {
         return containsIgnoreCase(containing, toBeContained);
     }
+
+
 
 }
