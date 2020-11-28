@@ -1,5 +1,6 @@
 package com.prodyna.pageObjects;
 
+import com.prodyna.configuration.BasePageConfiguration;
 import com.prodyna.configuration.BaseTestConfiguration;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -12,14 +13,12 @@ import java.util.List;
 
 import static com.prodyna.utility.Constants.*;
 
-public class ProductPage extends BaseTestConfiguration {
+public class ProductPage extends BasePageConfiguration {
     WebDriver driver;
 
     public ProductPage(WebDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
+        super(driver);
     }
-
 
     @FindBy(xpath = titleLocator)
     public WebElement pageTitle;
@@ -49,21 +48,6 @@ public class ProductPage extends BaseTestConfiguration {
     public WebElement productShortDescription;
 
     public By product = By.className("product-item");
-
-    public boolean verifyCategoriesTitles(List<WebElement> list) {
-        boolean titlesCorrect = true;
-        for (WebElement element : list) {
-            clickElement(element);
-            String elementText = element.getText();
-
-            if (!elementText.equalsIgnoreCase(pageTitle.getText())) {
-              titlesCorrect = false;
-              break;
-            }
-        }
-
-        return true;
-    }
 
     public List<WebElement> getProductSelectors(){
         List<WebElement> productSelectors = new ArrayList<>();

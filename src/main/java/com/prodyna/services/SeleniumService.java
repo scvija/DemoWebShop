@@ -90,6 +90,7 @@ public class SeleniumService {
         return containsIgnoreCase(containing, toBeContained);
     }
 
-
-
+    public void acceptAlert() {
+        driver.switchTo().alert().accept();
+    }
 }

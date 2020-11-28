@@ -52,7 +52,7 @@ public class LoginTest extends BaseTestConfiguration {
         LoginService loginService = new LoginService(driver);
         Header header = new Header(driver);
 
-        navigateToPage(loginPageUrl);
+        seleniumService.navigateToPage(loginPageUrl);
 
         // TODO loginmethod? where to store
 
@@ -108,7 +108,7 @@ public class LoginTest extends BaseTestConfiguration {
         SeleniumService seleniumService = new SeleniumService(driver);
         LoginPage login = new LoginPage(driver);
 
-        navigateToPage(passwordRecoveryUrl);
+        seleniumService.navigateToPage(passwordRecoveryUrl);
 
         seleniumService.enterText(login.passwordRecoveryEmailInput, emailValidLogin);
         seleniumService.clickElement(login.passwordRecoveryRecoverButton);

@@ -1,5 +1,6 @@
 package com.prodyna.pageObjects;
 
+import com.prodyna.configuration.BasePageConfiguration;
 import com.prodyna.configuration.BaseTestConfiguration;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -8,14 +9,11 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.asserts.SoftAssert;
 
-public class Search extends BaseTestConfiguration {
+public class Search extends BasePageConfiguration {
     public WebDriver driver;
-    public SoftAssert softAssert = new SoftAssert();
-    public WebDriverWait wait;
 
     public Search(WebDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
+        super(driver);
     }
 
     @FindBy(id = "small-searchterms")
@@ -78,12 +76,5 @@ public class Search extends BaseTestConfiguration {
     @FindBy(className = "product-title")
     public WebElement productTileTitle;
 
-    public void startAdvancedSearch(String textInput){
-        Search search = new Search(driver);
 
-        search.advancedSearchFieldInput.clear();
-        search.advancedSearchFieldInput.sendKeys(textInput);
-
-        search.advancedSearchButton.click();
-    }
 }
