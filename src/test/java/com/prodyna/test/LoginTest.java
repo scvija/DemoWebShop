@@ -6,14 +6,13 @@ import com.prodyna.pageObjects.LoginPage;
 import com.prodyna.pageObjects.ProductPage;
 import com.prodyna.services.LoginService;
 import com.prodyna.services.SeleniumService;
-import org.openqa.selenium.support.ui.Select;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.io.IOException;
+import static com.prodyna.pageObjects.LoginPage.*;
+import static com.prodyna.pageObjects.RegisterPage.*;
+import static com.prodyna.utility.Constants.loginPageUrl;
+import static com.prodyna.utility.Constants.passwordRecoveryUrl;
 
-import static com.prodyna.utility.Constants.*;
 
 public class LoginTest extends BaseTestConfiguration {
 
@@ -54,7 +53,7 @@ public class LoginTest extends BaseTestConfiguration {
 
         seleniumService.navigateToPage(loginPageUrl);
 
-        // TODO loginmethod? where to store
+        // TODO loginMethod? where to store
 
         loginService.loginWithCredentials(emailValidLogin, passwordValid);
         softAssert.assertTrue(seleniumService.compareElementTextWithExpected(header.myAccount, emailValidLogin));
@@ -94,7 +93,7 @@ public class LoginTest extends BaseTestConfiguration {
         seleniumService.clickElement(login.forgotPassword);
 
         softAssert.assertEquals(login.pageTitle.getText(), passwordRecoveryTitle);
-        softAssert.assertEquals(login.passwordRecoveryDescription.getText(), passwordRecoveryDescription);
+        softAssert.assertEquals(login.passwordRecoveryDescription.getText(), passwordRecoveryDescriptionText);
 
         softAssert.assertTrue(seleniumService.isElementDisplayed(login.passwordRecoveryEmailInput));
         softAssert.assertTrue(seleniumService.isElementDisplayed(login.passwordRecoveryRecoverButton));

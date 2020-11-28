@@ -15,6 +15,26 @@ public class LoginPage extends BasePageConfiguration {
         super(driver);
     }
 
+    // LOGIN PAGE
+
+    public static final String loginPageNewCustomerTitle = "New Customer";
+    public static final String loginPageNewCustomerText = "By creating an account on our website you will be able to shop faster, be up to date on an orders status, and keep track of the orders you have previously made.";
+    public static final String loginPageReturningCustomerTitle = "New Customer";
+    public static final String loginPageAboutTitle = "About login / registration";
+    public static final String loginPageAboutDescription = "Put your login / registration information here. You can edit this in the admin site.";
+    public static final String loginPageReturningErrorMessageAccountNotFound = "Login was unsuccessful. Please correct the errors and try again.\n" + "No customer account found";
+    public static final String loginPageReturningErrorMessageInvalidCredentials = "Login was unsuccessful. Please correct the errors and try again.\n" + "The credentials provided are incorrect";
+    public static final String loginPageReturningEmailInvalidText = "Please enter a valid email address.";
+
+    // PASSWORD RECOVERY PAGE
+
+    public static final String passwordRecoveryTitle = "Password recovery";
+    public static final String passwordRecoveryDescriptionText = "Please enter your email address below. You will receive a link to reset your password.";
+    public static final String passwordRecoveryWrongEmailMessage = "Wrong email";
+    public static final String passwordRecoveryEnterEmailMessage = "Enter your email";
+    public static final String passwordRecoveryEmailSentSuccessMessageText = "Email with instructions has been sent to you.";
+
+
     @FindBy(xpath = "//div[@class='new-wrapper register-block']//div[@class='title']")
     public WebElement newCustomerTitle;
 

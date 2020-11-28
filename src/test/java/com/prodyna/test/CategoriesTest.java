@@ -6,6 +6,7 @@ import com.prodyna.pageObjects.ProductPage;
 import com.prodyna.services.SeleniumService;
 import org.testng.annotations.Test;
 
+import static com.prodyna.pageObjects.ProductPage.*;
 import static com.prodyna.utility.Constants.*;
 
 public class CategoriesTest extends BaseTestConfiguration {

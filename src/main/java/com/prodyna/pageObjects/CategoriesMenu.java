@@ -17,6 +17,8 @@ public class CategoriesMenu extends BasePageConfiguration {
         super(driver);
     }
 
+
+
     @FindBy(xpath = "//ul[@class='top-menu'] //a[@href='/books']")
     public WebElement books;
 

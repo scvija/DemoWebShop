@@ -7,7 +7,10 @@ import com.prodyna.services.SearchService;
 import com.prodyna.services.SeleniumService;
 import org.testng.annotations.Test;
 
+import static com.prodyna.pageObjects.Search.*;
 import static com.prodyna.utility.Constants.*;
+import static com.prodyna.pageObjects.RegisterPage.*;
+
 
 public class SearchTest extends BaseTestConfiguration {
 

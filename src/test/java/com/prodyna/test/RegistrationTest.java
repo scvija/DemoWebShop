@@ -11,6 +11,7 @@ import org.testng.annotations.Test;
 
 import java.io.IOException;
 
+import static com.prodyna.pageObjects.RegisterPage.*;
 import static com.prodyna.utility.Constants.*;
 
 public class RegistrationTest extends BaseTestConfiguration {
