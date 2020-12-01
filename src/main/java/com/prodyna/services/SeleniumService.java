@@ -8,8 +8,6 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.asserts.SoftAssert;
 
-import java.util.List;
-
 import static org.apache.commons.lang3.StringUtils.containsIgnoreCase;
 
 public class SeleniumService {
@@ -33,23 +31,6 @@ public class SeleniumService {
     public void navigateToPage(String page) {
         driver.get(page);
     }
-
-    public void verifyElementsAreDisplayed(WebElement... list) {
-        for (WebElement element : list) {
-            softAssert.assertTrue(element.isDisplayed());
-        }
-
-        softAssert.assertAll();
-    }
-
-    public void verifyElementsAreDisplayed(List<WebElement> list) {
-        for (WebElement element : list) {
-            softAssert.assertTrue(isElementDisplayed(element), element + " element not found");
-        }
-
-        softAssert.assertAll();
-    }
-
 
     public boolean compareElementTextWithExpected(WebElement element, String expectedText) {
         String elementText = element.getText();
@@ -78,7 +59,6 @@ public class SeleniumService {
 
     public String getFieldText(WebElement element){
         return element.getAttribute("value");
-
     }
 
     public void waitUntilVisible(WebElement element) {
@@ -92,5 +72,13 @@ public class SeleniumService {
 
     public void acceptAlert() {
         driver.switchTo().alert().accept();
+    }
+
+    public String getCurrentUrl() {
+        return driver.getCurrentUrl();
+    }
+
+    public void navigateBack() {
+        driver.navigate().back();
     }
 }
