@@ -56,12 +56,12 @@ public class RegistrationTest extends BaseTestConfiguration {
         seleniumService.clickElement(register.registerButton);
 
         long timeStamp = System.currentTimeMillis();
-        String mailAddressAndTime = timeStamp + emailConcat;
+        String mailAddressAndTime = timeStamp + EMAIL_CONCAT;
 
-        registrationService.fillRegisterForm(firstName,lastName,mailAddressAndTime, passwordValid);
+        registrationService.fillRegisterForm(FIRST_NAME,LAST_NAME,mailAddressAndTime, PASSWORD_VALID);
         seleniumService.clickElement(register.registerButton);
 
-        softAssert.assertEquals(register.resultMessage.getText(), registrationComplete);
+        softAssert.assertEquals(register.resultMessage.getText(), REGISTRATION_COMPLETE);
         seleniumService.clickElement(register.continueButton);
 
         String myAccountText = header.myAccount.getText();
@@ -78,14 +78,14 @@ public class RegistrationTest extends BaseTestConfiguration {
 
         seleniumService.navigateToPage(registerPageUrl);
 
-        seleniumService.enterText(register.emailInput, emailInvalid);
+        seleniumService.enterText(register.emailInput, EMAIL_INVALID);
         seleniumService.clickElement(register.registerButton);
-        softAssert.assertEquals(register.emailMandatoryText.getText(),emailWrongForm);
+        softAssert.assertEquals(register.emailMandatoryText.getText(),EMAIL_WRONG_FORM);
 
-        registrationService.fillRegisterForm(firstName,lastName, emailValidLogin,passwordValid);
+        registrationService.fillRegisterForm(FIRST_NAME,LAST_NAME, EMAIL_VALID_LOGIN,PASSWORD_VALID);
         seleniumService.clickElement(register.registerButton);
 
-        softAssert.assertEquals(register.summaryErrorMessage.getText(),emailExists);
+        softAssert.assertEquals(register.summaryErrorMessage.getText(),EMAIL_EXISTS);
 
         softAssert.assertAll();
     }
@@ -97,15 +97,15 @@ public class RegistrationTest extends BaseTestConfiguration {
 
         seleniumService.navigateToPage(registerPageUrl);
 
-        seleniumService.enterText(register.passwordInput, passwordShort);
+        seleniumService.enterText(register.passwordInput, PASSWORD_SHORT);
         seleniumService.clickElement(register.registerButton);
-        softAssert.assertEquals(register.passwordMandatoryText.getText(),passwordTooShort);
+        softAssert.assertEquals(register.passwordMandatoryText.getText(),PASSWORD_TOO_SHORT);
 
-        seleniumService.enterText(register.passwordInput,passwordValid);
-        seleniumService.enterText(register.confirmedPasswordInput, passwordDifferent);
+        seleniumService.enterText(register.passwordInput,PASSWORD_VALID);
+        seleniumService.enterText(register.confirmedPasswordInput, PASSWORD_DIFFERENT);
 
         seleniumService.clickElement(register.registerButton);
-        softAssert.assertEquals(register.confirmPasswordMandatoryText.getText(),passwordMissmatch);
+        softAssert.assertEquals(register.confirmPasswordMandatoryText.getText(),PASSWORD_MISSMATCH);
 
         softAssert.assertAll();
 

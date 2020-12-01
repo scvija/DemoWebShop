@@ -20,39 +20,39 @@ public class Search extends BasePageConfiguration {
 
     // HEADER SEARCH
 
-    public static final String headerSearchStandardText = "Search store";
-    public static final String searchTitle = "Search";
-    public static final String searchShort = "ta";
-    public static final String searchInvalid = "DoesNotExist";
-    public static final String searchPartialValid = "boo";
-    public static final String searchPartialInvalid = "booo";
-    public static final String searchHealthBook = "Health Book";
-    public static final String noSearchResults = "No products were found that matched your criteria.";
-    public static final String minSearchLength =  "Search term minimum length is 3 characters";
+    public static final String HEADER_SEARCH_STANDARD_TEXT = "Search store";
+    public static final String SEARCH_TITLE = "Search";
+    public static final String SEARCH_SHORT = "ta";
+    public static final String SEARCH_INVALID = "DoesNotExist";
+    public static final String SEARCH_PARTIAL_VALID = "boo";
+    public static final String SEARCH_PARTIAL_INVALID = "booo";
+    public static final String SEARCH_HEALTH_BOOK = "Health Book";
+    public static final String NO_SEARCH_RESULTS = "No products were found that matched your criteria.";
+    public static final String MIN_SEARCH_LENGTH =  "Search term minimum length is 3 characters";
 
     // ADVANCED SEARCH
 
-    public static final String computerLower = "computer";
-    public static final String computerCapital = "Computer";
-    public static final String searchCategoryBooks = "Books";
-    public static final String searchCategoryComputers = "Computers";
-    public static final String searchCategoryDesktops = "Computers &gt;&gt; Desktops";
-    public static final String searchCategoryNotebooks = "Computers &gt;&gt; Notebooks";
-    public static final String searchCategoryAccessories = "Computers &gt;&gt; Accessories";
-    public static final String searchCategoryElectronics = "Electronics";
-    public static final String searchCategoryCamera = "Electronics &gt;&gt; Camera, photo";
-    public static final String searchCategoryPhones = "Electronics &gt;&gt; Cell phones";
-    public static final String searchCategoryShoes = "Apparel &amp; Shoes";
-    public static final String searchCategoryDigital = "Digital downloads";
-    public static final String searchCategoryJewelry = "Jewelry";
-    public static final String searchCategoryGift = "Gift Cards";
+    public static final String COMPUTER_LOWER = "computer";
+    public static final String COMPUTER_CAPITAL = "Computer";
+    public static final String SEARCH_CATEGORY_BOOKS = "Books";
+    public static final String SEARCH_CATEGORY_COMPUTERS = "Computers";
+    public static final String SEARCH_CATEGORY_DESKTOPS = "Computers &gt;&gt; Desktops";
+    public static final String SEARCH_CATEGORY_NOTEBOOKS = "Computers &gt;&gt; Notebooks";
+    public static final String SEARCH_CATEGORY_ACCESSORIES = "Computers &gt;&gt; Accessories";
+    public static final String SEARCH_CATEGORY_ELECTRONICS = "Electronics";
+    public static final String SEARCH_CATEGORY_CAMERA = "Electronics &gt;&gt; Camera, photo";
+    public static final String SEARCH_CATEGORY_PHONES = "Electronics &gt;&gt; Cell phones";
+    public static final String SEARCH_CATEGORY_SHOES = "Apparel &amp; Shoes";
+    public static final String SEARCH_CATEGORY_DIGITAL = "Digital downloads";
+    public static final String SEARCH_CATEGORY_JEWELRY = "Jewelry";
+    public static final String SEARCH_CATEGORY_GIFT = "Gift Cards";
 
-    public static final String searchManufacturerAll = "All";
-    public static final String searchManufacturerTricentis = "Tricentis";
+    public static final String SEARCH_MANUFACTURER_ALL = "All";
+    public static final String SEARCH_MANUFACTURER_TRICENTIS = "Tricentis";
 
-    public static final String searchPriceHigh = "10000";
-    public static final String searchPriceMiddle = "1000";
-    public static final String searchPriceLow = "100";
+    public static final String SEARCH_PRICE_HIGH = "10000";
+    public static final String SEARCH_PRICE_MIDDLE = "1000";
+    public static final String SEARCH_PRICE_LOW = "100";
 
     public static final String searchBookPartialDescription = "Worried about your health";
     @FindBy(id = "small-searchterms")

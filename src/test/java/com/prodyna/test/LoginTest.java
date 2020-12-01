@@ -55,8 +55,8 @@ public class LoginTest extends BaseTestConfiguration {
 
         // TODO loginMethod? where to store
 
-        loginService.loginWithCredentials(emailValidLogin, passwordValid);
-        softAssert.assertTrue(seleniumService.compareElementTextWithExpected(header.myAccount, emailValidLogin));
+        loginService.loginWithCredentials(EMAIL_VALID_LOGIN, PASSWORD_VALID);
+        softAssert.assertTrue(seleniumService.compareElementTextWithExpected(header.myAccount, EMAIL_VALID_LOGIN));
 
         softAssert.assertAll();
     }
@@ -71,13 +71,13 @@ public class LoginTest extends BaseTestConfiguration {
         seleniumService.navigateToPage(loginPageUrl);
 
         seleniumService.clickElement(login.returningLoginButton);
-        softAssert.assertEquals(login.returningErrorMessage.getText(), loginPageReturningErrorMessageAccountNotFound);
+        softAssert.assertEquals(login.returningErrorMessage.getText(), LOGIN_PAGE_RETURNING_ERROR_MESSAGE_ACCOUNT_NOT_FOUND);
 
-        loginService.loginWithCredentials(emailInvalid, passwordValid);
-        softAssert.assertEquals(login.returningEmailValidationMessage.getText(), loginPageReturningEmailInvalidText);
+        loginService.loginWithCredentials(EMAIL_INVALID, PASSWORD_VALID);
+        softAssert.assertEquals(login.returningEmailValidationMessage.getText(), LOGIN_PAGE_RETURNING_EMAIL_INVALID_TEXT);
 
-        loginService.loginWithCredentials(emailValidLogin, passwordDifferent);
-        softAssert.assertEquals(login.returningErrorMessage.getText(), loginPageReturningErrorMessageInvalidCredentials);
+        loginService.loginWithCredentials(EMAIL_VALID_LOGIN, PASSWORD_DIFFERENT);
+        softAssert.assertEquals(login.returningErrorMessage.getText(), LOGIN_PAGE_RETURNING_ERROR_MESSAGE_INVALID_CREDENTIALS);
 
         softAssert.assertAll();
     }
@@ -92,8 +92,8 @@ public class LoginTest extends BaseTestConfiguration {
 
         seleniumService.clickElement(login.forgotPassword);
 
-        softAssert.assertEquals(login.pageTitle.getText(), passwordRecoveryTitle);
-        softAssert.assertEquals(login.passwordRecoveryDescription.getText(), passwordRecoveryDescriptionText);
+        softAssert.assertEquals(login.pageTitle.getText(), PASSWORD_RECOVERY_TITLE);
+        softAssert.assertEquals(login.passwordRecoveryDescription.getText(), PASSWORD_RECOVERY_DESCRIPTION_TEXT);
 
         softAssert.assertTrue(seleniumService.isElementDisplayed(login.passwordRecoveryEmailInput));
         softAssert.assertTrue(seleniumService.isElementDisplayed(login.passwordRecoveryRecoverButton));
@@ -109,9 +109,9 @@ public class LoginTest extends BaseTestConfiguration {
 
         seleniumService.navigateToPage(passwordRecoveryUrl);
 
-        seleniumService.enterText(login.passwordRecoveryEmailInput, emailValidLogin);
+        seleniumService.enterText(login.passwordRecoveryEmailInput, EMAIL_VALID_LOGIN);
         seleniumService.clickElement(login.passwordRecoveryRecoverButton);
-        softAssert.assertEquals(login.passwordRecoveryEmailSentMessage.getText(), passwordRecoveryEmailSentSuccessMessageText);
+        softAssert.assertEquals(login.passwordRecoveryEmailSentMessage.getText(), PASSWORD_RECOVERY_EMAIL_SENT_SUCCESS_MESSAGE_TEXT);
 
         softAssert.assertAll();
     }
@@ -124,10 +124,10 @@ public class LoginTest extends BaseTestConfiguration {
         seleniumService.navigateToPage(passwordRecoveryUrl);
 
         seleniumService.clickElement(login.passwordRecoveryRecoverButton);
-        softAssert.assertEquals(login.passwordRecoveryEmailValidationMessage.getText(), passwordRecoveryEnterEmailMessage);
+        softAssert.assertEquals(login.passwordRecoveryEmailValidationMessage.getText(), PASSWORD_RECOVERY_ENTER_EMAIL_MESSAGE);
 
-        seleniumService.enterText(login.passwordRecoveryEmailInput, emailInvalid);
-        softAssert.assertEquals(login.passwordRecoveryEmailValidationMessage.getText(), passwordRecoveryWrongEmailMessage);
+        seleniumService.enterText(login.passwordRecoveryEmailInput, EMAIL_INVALID);
+        softAssert.assertEquals(login.passwordRecoveryEmailValidationMessage.getText(), PASSWORD_RECOVERY_WRONG_EMAIL_MESSAGE);
 
         softAssert.assertAll();
     }

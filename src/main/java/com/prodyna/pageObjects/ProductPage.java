@@ -21,17 +21,17 @@ public class ProductPage extends BasePageConfiguration {
     }
 
     // VALUES FOR SORTING DROPDOWNS
-    public static final String sortPosition = "Position";
-    public static final String sortNameAsc = "Name: A to Z";
-    public static final String sortNameDesc = "Name: Z to A";
-    public static final String sortLow = "Price: Low to High";
-    public static final String sortHigh = "Price: High to Low";
-    public static final String sortCreated = "Created on";
+    public static final String SORT_POSITION = "Position";
+    public static final String SORT_NAME_ASC = "Name: A to Z";
+    public static final String SORT_NAME_DESC = "Name: Z to A";
+    public static final String SORT_LOW = "Price: Low to High";
+    public static final String SORT_HIGH = "Price: High to Low";
+    public static final String SORT_CREATED = "Created on";
 
     // VALUES FOR ELEMENTS PER PAGE
-    public static final String display4 = "4";
-    public static final String display8 = "8";
-    public static final String display12= "12";
+    public static final String DISPLAY4 = "4";
+    public static final String DISPLAY8 = "8";
+    public static final String DISPLAY12= "12";
     // VALUES FOR VIEW AS
     public static final String grid = "Grid";
     public static final String list = "List";

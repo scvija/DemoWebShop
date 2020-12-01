@@ -24,27 +24,27 @@ public class RegisterPage extends BaseTestConfiguration {
 
     // REGISTER USER DATA
 
-    public static final String firstName = "Peter";
-    public static final String lastName = "Peterson";
-    public static final String emailConcat = "peter.peterson@gmail.com";
-    public static final String emailInvalid = firstName + lastName;
-    public static final String emailValidLogin = "peterpeterson@gmail.com";
-    public static final String passwordValid = "Test123!";
-    public static final String passwordShort = "test";
-    public static final String passwordDifferent = "!123Test";
+    public static final String FIRST_NAME = "Peter";
+    public static final String LAST_NAME = "Peterson";
+    public static final String EMAIL_CONCAT = "peter.peterson@gmail.com";
+    public static final String EMAIL_INVALID = FIRST_NAME + LAST_NAME;
+    public static final String EMAIL_VALID_LOGIN = "peterpeterson@gmail.com";
+    public static final String PASSWORD_VALID = "Test123!";
+    public static final String PASSWORD_SHORT = "test";
+    public static final String PASSWORD_DIFFERENT = "!123Test";
 
     // REGISTER FORM MESSAGES
 
 
-    public static final String firstNameMandatory = "First name is required.";
-    public static final String lastNameMandatory = "Last name is required.";
-    public static final String emailMandatory = "Email is required.";
-    public static final String emailWrongForm = "Wrong email";
-    public static final String passwordMandatory = "Password is required.";
-    public static final String passwordTooShort = "The password should have at least 6 characters.";
-    public static final String passwordMissmatch = "The password and confirmation password do not match.";
-    public static final String emailExists = "The specified email already exists";
-    public static final String registrationComplete = "Your registration completed";
+    public static final String FIRST_NAME_MANDATORY = "First name is required.";
+    public static final String LAST_NAME_MANDATORY = "Last name is required.";
+    public static final String EMAIL_MANDATORY = "Email is required.";
+    public static final String EMAIL_WRONG_FORM = "Wrong email";
+    public static final String PASSWORD_MANDATORY = "Password is required.";
+    public static final String PASSWORD_TOO_SHORT = "The password should have at least 6 characters.";
+    public static final String PASSWORD_MISSMATCH = "The password and confirmation password do not match.";
+    public static final String EMAIL_EXISTS = "The specified email already exists";
+    public static final String REGISTRATION_COMPLETE = "Your registration completed";
 
 
     @FindBy(xpath = "//strong[contains(text(),'Your Personal Details')]")

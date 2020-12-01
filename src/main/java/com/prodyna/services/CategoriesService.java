@@ -16,4 +16,13 @@ public class CategoriesService extends SeleniumService {
 
     }
 
+    public void assertCategoryDetailHasCorrectTitle(WebElement element){
+        CategoriesMenu categoriesMenu = new CategoriesMenu(driver);
+        AssertService assertService = new AssertService(driver);
+
+        clickElement(element);
+        assertService.assertEqualsWebElementsText(element, categoriesMenu.pageTitle);
+
+    }
+
 }

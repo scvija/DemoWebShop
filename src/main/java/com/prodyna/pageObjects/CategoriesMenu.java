@@ -9,6 +9,8 @@ import org.testng.asserts.SoftAssert;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.prodyna.utility.Constants.titleLocator;
+
 public class CategoriesMenu extends BasePageConfiguration {
 
     public WebDriver driver;
@@ -43,6 +45,8 @@ public class CategoriesMenu extends BasePageConfiguration {
     @FindBy(xpath = "//ul[@class='top-menu']/li")
     public List<WebElement> categoriesMenu;
 
+    @FindBy(xpath = titleLocator)
+    public WebElement pageTitle;
 
     public List<WebElement> getCategoriesElements(){
         List<WebElement> categoriesElements = new ArrayList<>();
