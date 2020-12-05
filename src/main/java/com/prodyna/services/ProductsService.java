@@ -5,6 +5,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
+import java.util.stream.Stream;
+
+import static com.prodyna.pageObjects.ProductPage.DISPLAY4;
 
 public class ProductsService extends SeleniumService {
 
@@ -12,20 +15,15 @@ public class ProductsService extends SeleniumService {
         super(driver);
     }
 
-    public boolean verifyCategoriesTitles(List<WebElement> list) {
+    public void verifyNumberOfProductPerPage(List<String> list) {
+        SeleniumService seleniumService = new SeleniumService(driver);
         ProductPage products = new ProductPage(driver);
-        boolean titlesCorrect = true;
 
-        for (WebElement element : list) {
-            clickElement(element);
-            String elementText = element.getText();
-
-            if (!elementText.equalsIgnoreCase(products.pageTitle.getText())) {
-                titlesCorrect = false;
-                break;
-            }
+        for (String value : list) {
+            seleniumService.selectValueInField(products.pageSize, value);
+            int intValue = Integer.parseInt(value);
+            softAssert.assertTrue(seleniumService.countElementsUsingLocator(products.product) == intValue);
         }
-
-        return true;
+        softAssert.assertAll();
     }
 }
