@@ -30,7 +30,6 @@ public class AssertService {
 
     public void assertElementIsDisplayed(WebElement element){
         SoftAssert softAssert = new SoftAssert();
-
         softAssert.assertTrue(element.isDisplayed(), "Element not found: " + element);
 
     }
@@ -41,7 +40,6 @@ public class AssertService {
         for (WebElement element : elements) {
             softAssert.assertTrue(element.isDisplayed(), "Element not found: " + element);
         }
-
         softAssert.assertAll();
     }
 
@@ -55,6 +53,7 @@ public class AssertService {
         softAssert.assertAll();
     }
 
+
     public void assertEqualsWebElementsText(WebElement element1, WebElement element2){
         SoftAssert softAssert = new SoftAssert();
 
@@ -63,6 +62,14 @@ public class AssertService {
 
         softAssert.assertAll();
 
+    }
+
+    public void assertElementNotDisplayed(WebElement element){
+        SoftAssert softAssert = new SoftAssert();
+        SeleniumService seleniumService = new SeleniumService(driver);
+
+        softAssert.assertFalse(seleniumService.isElementDisplayed(element));
+        softAssert.assertAll();
     }
 
 
