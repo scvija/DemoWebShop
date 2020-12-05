@@ -22,7 +22,7 @@ public class ProductsService extends SeleniumService {
         for (String value : list) {
             seleniumService.selectValueInField(products.pageSize, value);
             int intValue = Integer.parseInt(value);
-            softAssert.assertTrue(seleniumService.countElementsUsingLocator(products.product) == intValue);
+            softAssert.assertTrue(seleniumService.countElementsUsingLocator(products.product) == intValue, "The number of products on this page is not " + intValue);
         }
         softAssert.assertAll();
     }
