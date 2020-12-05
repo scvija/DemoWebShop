@@ -75,4 +75,12 @@ public class ProductPage extends BasePageConfiguration {
         return productSelectors;
     }
 
+    public List<String> getDisplayProductNumbers(){
+        List<String> productsPerPage = new ArrayList<>();
+        productsPerPage.add(DISPLAY4);
+        productsPerPage.add(DISPLAY8);
+        productsPerPage.add(DISPLAY12);
+
+        return  productsPerPage;
+    }
 }
