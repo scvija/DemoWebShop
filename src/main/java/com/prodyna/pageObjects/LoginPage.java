@@ -6,6 +6,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static com.prodyna.utility.Constants.titleLocator;
 
 public class LoginPage extends BasePageConfiguration {
@@ -92,5 +95,22 @@ public class LoginPage extends BasePageConfiguration {
     @FindBy(xpath = titleLocator)
     public WebElement pageTitle;
 
+    public List<WebElement> getLoginElements(){
+        List<WebElement> elements = new ArrayList<>();
 
+        elements.add(pageTitle);
+        elements.add(newCustomerTitle);
+        elements.add(newCustomerText);
+        elements.add(newCustomerRegisterButton);
+        elements.add(returningCustomerTitle);
+        elements.add(returningCustomerTitle);
+        elements.add(returningPasswordInput);
+        elements.add(returningRememberMeCheckbox);
+        elements.add(returningCustomerTitle);
+        elements.add(returningLoginButton);
+        elements.add(aboutLoginAndRegistrationTitle);
+        elements.add(aboutLoginAndRegistrationDescription);
+
+        return elements;
+    }
 }

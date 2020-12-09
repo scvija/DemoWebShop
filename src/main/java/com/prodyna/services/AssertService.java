@@ -21,7 +21,7 @@ public class AssertService {
         String actualUrl = seleniumService.getCurrentUrl();
         assertTrue(actualUrl.contains(expectedStringInUrl), "Actual Url is: " + actualUrl);
     }
-
+    // TODO not soft assert
     public void assertUrlEqualsToExpected(String expectedUrl) {
         SeleniumService seleniumService = new SeleniumService(driver);
         String actualUrl = seleniumService.getCurrentUrl();
@@ -72,5 +72,13 @@ public class AssertService {
         softAssert.assertAll();
     }
 
+    public void assertElementTextEqualsText(WebElement element, String expectedText) {
+        SoftAssert softAssert = new SoftAssert();
+
+        String elementText = element.getText();
+        softAssert.assertTrue(elementText.equalsIgnoreCase(expectedText));
+
+        softAssert.assertAll();
+    }
 
 }

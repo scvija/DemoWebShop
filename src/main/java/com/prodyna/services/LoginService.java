@@ -4,6 +4,9 @@ import com.prodyna.pageObjects.LoginPage;
 import org.openqa.selenium.WebDriver;
 import org.testng.asserts.SoftAssert;
 
+import static com.prodyna.pageObjects.LoginPage.PASSWORD_RECOVERY_DESCRIPTION_TEXT;
+import static com.prodyna.pageObjects.LoginPage.PASSWORD_RECOVERY_TITLE;
+
 public class LoginService extends SeleniumService{
 
     public LoginService(WebDriver driver) {
@@ -26,23 +29,22 @@ public class LoginService extends SeleniumService{
 
     public void verifyLoginElementsAreDisplayed() {
         LoginPage login = new LoginPage(driver);
+        AssertService assertService = new AssertService(driver);
 
-        softAssert.assertTrue(isElementDisplayed(login.pageTitle));
+        assertService.assertElementsAreDisplayed(login.getLoginElements());
 
-        softAssert.assertTrue(isElementDisplayed(login.newCustomerTitle));
-        softAssert.assertTrue(isElementDisplayed(login.newCustomerText));
-        softAssert.assertTrue(isElementDisplayed(login.newCustomerRegisterButton));
+    }
 
-        softAssert.assertTrue(isElementDisplayed(login.returningCustomerTitle));
-        softAssert.assertTrue(isElementDisplayed(login.returningCustomerTitle));
-        softAssert.assertTrue(isElementDisplayed(login.returningPasswordInput));
-        softAssert.assertTrue(isElementDisplayed(login.returningRememberMeCheckbox));
-        softAssert.assertTrue(isElementDisplayed(login.returningCustomerTitle));
-        softAssert.assertTrue(isElementDisplayed(login.returningLoginButton));
+    public void verifyPasswordRecoveryElements(){
+        LoginPage login = new LoginPage(driver);
+        AssertService assertService = new AssertService(driver);
 
-        softAssert.assertTrue(isElementDisplayed(login.aboutLoginAndRegistrationTitle));
-        softAssert.assertTrue(isElementDisplayed(login.aboutLoginAndRegistrationDescription));
+        assertService.assertElementTextEqualsText(login.pageTitle, PASSWORD_RECOVERY_TITLE);
+        assertService.assertElementTextEqualsText(login.passwordRecoveryDescription, PASSWORD_RECOVERY_DESCRIPTION_TEXT);
 
-        softAssert.assertAll();
+        assertService.assertElementIsDisplayed(login.passwordRecoveryEmailInput);
+        assertService.assertElementIsDisplayed(login.passwordRecoveryRecoverButton);
+
+
     }
 }
