@@ -16,13 +16,12 @@ public class ProductsService extends SeleniumService {
     }
 
     public void verifyNumberOfProductPerPage(List<String> list) {
-        SeleniumService seleniumService = new SeleniumService(driver);
         ProductPage products = new ProductPage(driver);
 
         for (String value : list) {
-            seleniumService.selectValueInField(products.pageSize, value);
+            selectValueInField(products.pageSize, value);
             int intValue = Integer.parseInt(value);
-            softAssert.assertTrue(seleniumService.countElementsUsingLocator(products.product) == intValue, "The number of products on this page is not " + intValue);
+            softAssert.assertTrue(countElementsUsingLocator(products.product) == intValue, "The number of products on this page is not " + intValue);
         }
         softAssert.assertAll();
     }

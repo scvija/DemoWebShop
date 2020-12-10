@@ -6,6 +6,7 @@ import org.testng.asserts.SoftAssert;
 
 import static com.prodyna.pageObjects.LoginPage.PASSWORD_RECOVERY_DESCRIPTION_TEXT;
 import static com.prodyna.pageObjects.LoginPage.PASSWORD_RECOVERY_TITLE;
+import static com.prodyna.pageObjects.RegisterPage.EMAIL_VALID_LOGIN;
 
 public class LoginService extends SeleniumService{
 
@@ -44,7 +45,12 @@ public class LoginService extends SeleniumService{
 
         assertService.assertElementIsDisplayed(login.passwordRecoveryEmailInput);
         assertService.assertElementIsDisplayed(login.passwordRecoveryRecoverButton);
+    }
 
+    public void sendPasswordRecoveryEmail(String email){
+        LoginPage login = new LoginPage(driver);
 
+        enterText(login.passwordRecoveryEmailInput, email);
+        clickElement(login.passwordRecoveryRecoverButton);
     }
 }

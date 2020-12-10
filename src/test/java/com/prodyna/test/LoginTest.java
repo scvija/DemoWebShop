@@ -93,30 +93,32 @@ public class LoginTest extends BaseTestConfiguration {
     public void LoginPagePasswordRecoveryHappyPathTest() {
         SeleniumService seleniumService = new SeleniumService(driver);
         LoginPage login = new LoginPage(driver);
+        AssertService assertService = new AssertService(driver);
+        LoginService loginService = new LoginService(driver);
 
         seleniumService.navigateToPage(passwordRecoveryUrl);
 
-        seleniumService.enterText(login.passwordRecoveryEmailInput, EMAIL_VALID_LOGIN);
-        seleniumService.clickElement(login.passwordRecoveryRecoverButton);
-        softAssert.assertEquals(login.passwordRecoveryEmailSentMessage.getText(), PASSWORD_RECOVERY_EMAIL_SENT_SUCCESS_MESSAGE_TEXT);
+        loginService.sendPasswordRecoveryEmail(EMAIL_VALID_LOGIN);
+        assertService.assertElementTextEqualsText(login.passwordRecoveryEmailSentMessage,PASSWORD_RECOVERY_EMAIL_SENT_SUCCESS_MESSAGE_TEXT );
 
-        softAssert.assertAll();
     }
 
     @Test
     public void LoginPagePasswordRecoveryNegativeTest() {
         SeleniumService seleniumService = new SeleniumService(driver);
         LoginPage login = new LoginPage(driver);
+        LoginService loginService = new LoginService(driver);
+        AssertService assertService = new AssertService(driver);
+
 
         seleniumService.navigateToPage(passwordRecoveryUrl);
 
         seleniumService.clickElement(login.passwordRecoveryRecoverButton);
-        softAssert.assertEquals(login.passwordRecoveryEmailValidationMessage.getText(), PASSWORD_RECOVERY_ENTER_EMAIL_MESSAGE);
+        assertService.assertElementTextEqualsText(login.passwordRecoveryEmailValidationMessage, PASSWORD_RECOVERY_ENTER_EMAIL_MESSAGE);
 
         seleniumService.enterText(login.passwordRecoveryEmailInput, EMAIL_INVALID);
-        softAssert.assertEquals(login.passwordRecoveryEmailValidationMessage.getText(), PASSWORD_RECOVERY_WRONG_EMAIL_MESSAGE);
+        assertService.assertElementTextEqualsText(login.passwordRecoveryEmailValidationMessage,PASSWORD_RECOVERY_WRONG_EMAIL_MESSAGE);
 
-        softAssert.assertAll();
     }
 
 
