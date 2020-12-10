@@ -11,43 +11,21 @@ public class RegistrationService extends  SeleniumService{
 
     public void verifyRegistrationFormFieldsAreDisplayed(){
         RegisterPage register = new RegisterPage(driver);
+        AssertService assertService = new AssertService(driver);
 
-        softAssert.assertTrue(register.myPersonalDetails.isDisplayed());
-        softAssert.assertTrue(register.yourPassword.isDisplayed());
+        assertService.assertElementsAreDisplayed(register.getRegistrationFormElements());
 
-        softAssert.assertTrue(register.genderLabel.isDisplayed());
-        softAssert.assertTrue(register.maleGender.isDisplayed());
-        softAssert.assertTrue(register.femaleGender.isDisplayed());
-
-        softAssert.assertTrue(register.firstNameLabel.isDisplayed());
-        softAssert.assertTrue(register.firstNameInput.isDisplayed());
-
-        softAssert.assertTrue(register.lastNameLabel.isDisplayed());
-        softAssert.assertTrue(register.lastnameInput.isDisplayed());
-
-        softAssert.assertTrue(register.passwordLabel.isDisplayed());
-        softAssert.assertTrue(register.passwordInput.isDisplayed());
-
-        softAssert.assertTrue(register.confirmedPasswordLabel.isDisplayed());
-        softAssert.assertTrue(register.confirmedPasswordInput.isDisplayed());
-
-        softAssert.assertTrue(register.registerButton.isDisplayed());
-
-        softAssert.assertAll();
     }
 
     public void verifyRegistrationFormMandatoryText(){
         RegisterPage register = new RegisterPage(driver);
+        AssertService assertService = new AssertService(driver);
 
-        softAssert.assertTrue(register.lastnameMandatoryText.isDisplayed());
-        softAssert.assertTrue(register.emailMandatoryText.isDisplayed());
-        softAssert.assertTrue(register.passwordMandatoryText.isDisplayed());
-        softAssert.assertTrue(register.confirmPasswordMandatoryText.isDisplayed());
+        assertService.assertElementsAreDisplayed(register.getMandatoryFieldText());
 
-        softAssert.assertAll();
     }
 
-    public void fillRegisterForm(String firstName, String lastName, String email, String password){
+    public void submitRegisterForm(String firstName, String lastName, String email, String password){
         RegisterPage register = new RegisterPage(driver);
 
         enterText(register.firstNameInput, firstName);
@@ -55,5 +33,8 @@ public class RegistrationService extends  SeleniumService{
         enterText(register.emailInput, email);
         enterText(register.passwordInput, password);
         enterText(register.confirmedPasswordInput, password);
+
+        clickElement(register.registerButton);
+
     }
 }

@@ -8,6 +8,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.asserts.SoftAssert;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -125,4 +126,37 @@ public class RegisterPage extends BaseTestConfiguration {
     @FindBy(className = "result")
     public WebElement resultMessage;
 
+
+    public List<WebElement> getRegistrationFormElements(){
+        List<WebElement> registrationElements = new ArrayList<>();
+
+        registrationElements.add(myPersonalDetails);
+        registrationElements.add(yourPassword);
+        registrationElements.add(genderLabel);
+        registrationElements.add(maleGender);
+        registrationElements.add(femaleGender);
+        registrationElements.add(firstNameLabel);
+        registrationElements.add(firstNameInput);
+        registrationElements.add(lastNameLabel);
+        registrationElements.add(lastnameInput);
+        registrationElements.add(passwordLabel);
+        registrationElements.add(passwordInput);
+        registrationElements.add(confirmedPasswordLabel);
+        registrationElements.add(confirmedPasswordInput);
+        registrationElements.add(registerButton);
+
+        return registrationElements;
+    }
+
+    public List<WebElement> getMandatoryFieldText(){
+        List<WebElement> mandatoryFieldText = new ArrayList<>();
+
+        mandatoryFieldText.add(firstNameMandatoryText);
+        mandatoryFieldText.add(lastnameMandatoryText);
+        mandatoryFieldText.add(emailMandatoryText);
+        mandatoryFieldText.add(passwordMandatoryText);
+        mandatoryFieldText.add(confirmPasswordMandatoryText);
+
+        return mandatoryFieldText;
+    }
 }

@@ -32,6 +32,8 @@ public class AssertService {
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertTrue(element.isDisplayed(), "Element not found: " + element);
 
+        softAssert.assertAll();
+
     }
 
     public void assertElementsAreDisplayed(WebElement... elements) {
