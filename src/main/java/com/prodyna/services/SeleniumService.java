@@ -61,11 +61,6 @@ public class SeleniumService {
         return element.getAttribute("value");
     }
 
-    public void waitUntilVisible(WebElement element) {
-        WebDriverWait wait = new WebDriverWait(driver, 5);
-        wait.until(ExpectedConditions.visibilityOf(element));
-    }
-
     public boolean textContainsIgnoreCase(String containing, String toBeContained) {
         return containsIgnoreCase(containing, toBeContained);
     }
@@ -81,4 +76,5 @@ public class SeleniumService {
     public void navigateBack() {
         driver.navigate().back();
     }
+
 }
