@@ -3,13 +3,18 @@ package com.prodyna.test;
 import com.prodyna.configuration.BaseTestConfiguration;
 import com.prodyna.pageObjects.ProductPage;
 import com.prodyna.pageObjects.Search;
+import com.prodyna.services.AssertService;
 import com.prodyna.services.SearchService;
 import com.prodyna.services.SeleniumService;
+import com.prodyna.services.WaitService;
 import org.testng.annotations.Test;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import static com.prodyna.pageObjects.RegisterPage.EMAIL_INVALID;
 import static com.prodyna.pageObjects.Search.*;
-import static com.prodyna.utility.Constants.*;
-import static com.prodyna.pageObjects.RegisterPage.*;
+import static com.prodyna.utility.Constants.searchUrl;
 
 
 public class SearchTest extends BaseTestConfiguration {
@@ -17,39 +22,35 @@ public class SearchTest extends BaseTestConfiguration {
     @Test
     public void headerSearchTestLayout() {
         SeleniumService seleniumService = new SeleniumService(driver);
+        AssertService assertService = new AssertService(driver);
         Search search = new Search(driver);
+        SearchService searchService = new SearchService(driver);
 
         seleniumService.navigateToPage(searchUrl);
 
-        softAssert.assertTrue(seleniumService.isElementDisplayed(search.headerSearch));
-        softAssert.assertTrue(seleniumService.isElementDisplayed(search.headerSearchButton));
+        searchService.verifyHeaderSearchElements();
 
-        softAssert.assertEquals(seleniumService.getFieldText(search.headerSearch), HEADER_SEARCH_STANDARD_TEXT);
+        seleniumService.clickElement(search.headerSearch);
+        assertService.assertFieldStandardTextEqualsText(search.headerSearch, "");
 
-        search.headerSearch.click();
-        softAssert.assertEquals(seleniumService.getFieldText(search.headerSearch), "");
-
-        softAssert.assertAll();
     }
 
     @Test
     public void headerSearchShort() {
         SeleniumService seleniumService = new SeleniumService(driver);
         Search search = new Search(driver);
+        SearchService searchService = new SearchService(driver);
         ProductPage products = new ProductPage(driver);
+        AssertService assertService = new AssertService(driver);
 
         seleniumService.navigateToPage(searchUrl);
 
-        seleniumService.enterText(search.headerSearch, SEARCH_SHORT);
-        seleniumService.clickElement(search.headerSearchButton);
+        searchService.startHeaderSearch(SEARCH_SHORT);
 
-        softAssert.assertEquals(products.pageTitle.getText(), SEARCH_TITLE);
-        softAssert.assertEquals(search.warning.getText(), MIN_SEARCH_LENGTH);
+        assertService.assertElementTextEqualsText(search.pageTitle, SEARCH_TITLE);
+        assertService.assertElementTextEqualsText(search.warning, MIN_SEARCH_LENGTH);
 
-        String advancedSearchFieldValue = seleniumService.getFieldText(search.advancedSearchFieldInput);
-        softAssert.assertEquals(advancedSearchFieldValue, SEARCH_SHORT);
-
-        softAssert.assertAll();
+        assertService.assertFieldStandardTextEqualsText(search.advancedSearchFieldInput, SEARCH_SHORT);
     }
 
     @Test
@@ -57,21 +58,22 @@ public class SearchTest extends BaseTestConfiguration {
         SeleniumService seleniumService = new SeleniumService(driver);
         Search search = new Search(driver);
         ProductPage products = new ProductPage(driver);
+        WaitService waitService = new WaitService(driver);
+        AssertService assertService = new AssertService(driver);
 
         seleniumService.navigateToPage(searchUrl);
 
         seleniumService.enterText(search.headerSearch, SEARCH_PARTIAL_VALID);
 
-        seleniumService.waitUntilVisible(search.headerSearchAutocompleteDialogue);
-        softAssert.assertTrue(search.headerSearchAutocompleteDialogue.isDisplayed());
 
+        waitService.waitUntilVisible(search.headerSearchAutocompleteDialogue);
+        assertService.assertElementIsDisplayed(search.headerSearchAutocompleteDialogue);
+
+        assertService.assertElementTextContainsIgnoreCase(search.headerSearchFirstRecommendation, SEARCH_PARTIAL_VALID);
         String firstRecommendationText = search.headerSearchFirstRecommendation.getText();
-        softAssert.assertTrue(seleniumService.textContainsIgnoreCase(firstRecommendationText, SEARCH_PARTIAL_VALID));
 
         seleniumService.clickElement(search.headerSearchFirstRecommendation);
-        softAssert.assertEquals(products.productName.getText(), firstRecommendationText);
-
-        softAssert.assertAll();
+        assertService.assertElementTextEqualsText(products.productName, firstRecommendationText);
 
     }
 

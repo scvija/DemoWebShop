@@ -9,6 +9,8 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.asserts.SoftAssert;
 
+import static com.prodyna.utility.Constants.titleLocator;
+
 public class Search extends BasePageConfiguration {
     public WebDriver driver;
 
@@ -115,5 +117,7 @@ public class Search extends BasePageConfiguration {
     @FindBy(className = "product-title")
     public WebElement productTileTitle;
 
+    @FindBy(xpath = titleLocator)
+    public WebElement pageTitle;
 
 }
