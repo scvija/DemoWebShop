@@ -1,34 +1,37 @@
 package com.prodyna.configuration;
 
-import com.prodyna.pageObjects.Search;
+import com.prodyna.pageObjects.Header;
+import com.prodyna.services.LoginService;
+import com.prodyna.services.SeleniumService;
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.asserts.SoftAssert;
 
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.List;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
-
-import static org.apache.commons.lang3.StringUtils.containsIgnoreCase;
 
 public class BaseTestConfiguration {
     public WebDriver driver;
     public static SoftAssert softAssert = new SoftAssert();
+    protected SeleniumService seleniumService;
+    protected Header header;
+    protected LoginService loginService;
+
 
     @BeforeMethod
     public void initialize() throws IOException {
         driver = initializeDriver();
+
+        seleniumService = new SeleniumService(driver);
+        header = new Header(driver);
+        loginService = new LoginService(driver);
     }
 
     @AfterMethod
