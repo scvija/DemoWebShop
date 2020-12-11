@@ -73,7 +73,7 @@ public class LoginTest extends BaseTestConfiguration {
         actualAndExpectedMessages.put(login.returningErrorMessage.getText(), LOGIN_PAGE_RETURNING_ERROR_MESSAGE_ACCOUNT_NOT_FOUND);
 // TODO separate single assert per test
         loginService.loginWithCredentials(EMAIL_INVALID, PASSWORD_VALID);
-        actualAndExpectedMessages.put(login.returningEmailValidationMessage.getText(),LOGIN_PAGE_RETURNING_ERROR_MESSAGE_ACCOUNT_NOT_FOUND );
+        actualAndExpectedMessages.put(login.returningEmailValidationMessage.getText(),LOGIN_PAGE_RETURNING_EMAIL_INVALID_TEXT );
 
         loginService.loginWithCredentials(EMAIL_VALID_LOGIN, PASSWORD_DIFFERENT);
         actualAndExpectedMessages.put(login.returningErrorMessage.getText(), LOGIN_PAGE_RETURNING_ERROR_MESSAGE_INVALID_CREDENTIALS);
