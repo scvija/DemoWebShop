@@ -18,14 +18,10 @@ public class LoginService extends SeleniumService{
     public void loginWithCredentials(String email, String password){
         LoginPage login = new LoginPage(driver);
 
-        login.returningEmailInput.clear();
-        login.returningEmailInput.sendKeys(email);
+        enterText(login.returningEmailInput, email);
+        enterText(login.returningPasswordInput,password);
 
-        login.returningPasswordInput.clear();
-        login.returningPasswordInput.sendKeys(password);
-
-        login.returningLoginButton.click();
-
+        clickElement(login.returningLoginButton);
     }
 
     public void verifyLoginElementsAreDisplayed() {
