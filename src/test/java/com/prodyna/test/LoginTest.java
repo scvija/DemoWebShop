@@ -6,7 +6,11 @@ import com.prodyna.pageObjects.LoginPage;
 import com.prodyna.services.AssertService;
 import com.prodyna.services.LoginService;
 import com.prodyna.services.SeleniumService;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import static com.prodyna.pageObjects.LoginPage.*;
 import static com.prodyna.pageObjects.RegisterPage.*;
@@ -15,17 +19,13 @@ import static com.prodyna.utility.Constants.*;
 
 public class LoginTest extends BaseTestConfiguration {
 
+
     @Test
-    public void loginPageLayout(){
-        SeleniumService seleniumService = new SeleniumService(driver);
-        Header header = new Header(driver);
-        LoginPage login = new LoginPage(driver);
-        LoginService loginService = new LoginService(driver);
+    public void loginPageLayout() {
 
         seleniumService.navigateToPage(loginPageUrl);
 
         seleniumService.clickElement(header.login);
-
         loginService.verifyLoginElementsAreDisplayed();
     }
 
@@ -66,14 +66,19 @@ public class LoginTest extends BaseTestConfiguration {
 
         seleniumService.navigateToPage(loginPageUrl);
 
-        seleniumService.clickElement(login.returningLoginButton);
-        assertService.assertElementTextEqualsText(login.returningErrorMessage, LOGIN_PAGE_RETURNING_ERROR_MESSAGE_ACCOUNT_NOT_FOUND);
+        Map<String,String> actualAndExpectedMessages = new HashMap<>();
 
+
+        seleniumService.clickElement(login.returningLoginButton);
+        actualAndExpectedMessages.put(login.returningErrorMessage.getText(), LOGIN_PAGE_RETURNING_ERROR_MESSAGE_ACCOUNT_NOT_FOUND);
+// TODO separate single assert per test
         loginService.loginWithCredentials(EMAIL_INVALID, PASSWORD_VALID);
-        assertService.assertElementTextEqualsText(login.returningEmailValidationMessage, LOGIN_PAGE_RETURNING_EMAIL_INVALID_TEXT);
+        actualAndExpectedMessages.put(login.returningEmailValidationMessage.getText(),LOGIN_PAGE_RETURNING_ERROR_MESSAGE_ACCOUNT_NOT_FOUND );
 
         loginService.loginWithCredentials(EMAIL_VALID_LOGIN, PASSWORD_DIFFERENT);
-        assertService.assertElementTextEqualsText(login.returningErrorMessage, LOGIN_PAGE_RETURNING_ERROR_MESSAGE_INVALID_CREDENTIALS);
+        actualAndExpectedMessages.put(login.returningErrorMessage.getText(), LOGIN_PAGE_RETURNING_ERROR_MESSAGE_INVALID_CREDENTIALS);
+
+        assertService.assertTextFromMap(actualAndExpectedMessages);
     }
 
     @Test
