@@ -9,6 +9,9 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.asserts.SoftAssert;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static com.prodyna.utility.Constants.titleLocator;
 
 public class Search extends BasePageConfiguration {
@@ -56,7 +59,7 @@ public class Search extends BasePageConfiguration {
     public static final String SEARCH_PRICE_MIDDLE = "1000";
     public static final String SEARCH_PRICE_LOW = "100";
 
-    public static final String searchBookPartialDescription = "Worried about your health";
+    public static final String SEARCH_BOOK_PARTIAL_DESCRIPTION = "Worried about your health";
     @FindBy(id = "small-searchterms")
     public WebElement headerSearch;
 
@@ -120,4 +123,24 @@ public class Search extends BasePageConfiguration {
     @FindBy(xpath = titleLocator)
     public WebElement pageTitle;
 
+
+    public List<WebElement> getAdvancedSearchElements(){
+        List<WebElement> advancedSearchElements = new ArrayList<>();
+
+
+        advancedSearchElements.add(advancedSearchFieldLabel);
+        advancedSearchElements.add(advancedSearchFieldInput);
+        advancedSearchElements.add(categoryLabel);
+        advancedSearchElements.add(categoryDropdown);
+        advancedSearchElements.add(autoSearchSubCategories);
+        advancedSearchElements.add(manufacturerLabel);
+        advancedSearchElements.add(manufacturerDropdown);
+        advancedSearchElements.add(priceRangeLabel);
+        advancedSearchElements.add(priceFromInput);
+        advancedSearchElements.add(priceToInput);
+        advancedSearchElements.add(searchDescriptions);
+        advancedSearchElements.add(advancedSearchButton);
+
+        return advancedSearchElements;
+    }
 }

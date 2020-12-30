@@ -77,4 +77,13 @@ public class SeleniumService {
         driver.navigate().back();
     }
 
+    public boolean getCheckboxValue(WebElement element){
+        return element.isSelected();
+    }
+
+    public void selectCheckbox(WebElement checkbox){
+        if(getCheckboxValue(checkbox) == false){
+            checkbox.click();
+        }
+    }
 }

@@ -9,12 +9,11 @@ import com.prodyna.services.SeleniumService;
 import com.prodyna.services.WaitService;
 import org.testng.annotations.Test;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import static com.prodyna.pageObjects.RegisterPage.EMAIL_INVALID;
 import static com.prodyna.pageObjects.Search.*;
 import static com.prodyna.utility.Constants.searchUrl;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 
 
 public class SearchTest extends BaseTestConfiguration {
@@ -40,7 +39,6 @@ public class SearchTest extends BaseTestConfiguration {
         SeleniumService seleniumService = new SeleniumService(driver);
         Search search = new Search(driver);
         SearchService searchService = new SearchService(driver);
-        ProductPage products = new ProductPage(driver);
         AssertService assertService = new AssertService(driver);
 
         seleniumService.navigateToPage(searchUrl);
@@ -80,27 +78,28 @@ public class SearchTest extends BaseTestConfiguration {
     @Test
     public void headerSearchInvalid() {
         SeleniumService seleniumService = new SeleniumService(driver);
+        AssertService assertService = new AssertService(driver);
         Search search = new Search(driver);
 
         seleniumService.navigateToPage(searchUrl);
 
         seleniumService.enterText(search.headerSearch, SEARCH_INVALID);
-        softAssert.assertFalse(search.headerSearchAutocompleteDialogue.isDisplayed());
+        assertService.assertElementNotDisplayed(search.headerSearchAutocompleteDialogue);
 
         seleniumService.clickElement(search.headerSearchButton);
-        softAssert.assertEquals(search.result.getText(), NO_SEARCH_RESULTS);
+        assertService.assertElementTextEqualsText(search.result, NO_SEARCH_RESULTS);
 
         seleniumService.clickElement(search.headerSearchButton);
 
         seleniumService.acceptAlert();
 
-        softAssert.assertAll();
     }
     @Test
     public void headerSearchValid() {
         SeleniumService seleniumService = new SeleniumService(driver);
         Search search = new Search(driver);
         ProductPage products = new ProductPage(driver);
+        AssertService assertService = new AssertService(driver);
 
         seleniumService.navigateToPage(searchUrl);
 
@@ -108,10 +107,7 @@ public class SearchTest extends BaseTestConfiguration {
 
         seleniumService.clickElement(search.headerSearchButton);
 
-        softAssert.assertEquals(products.productTileTitle.getText(), SEARCH_HEALTH_BOOK);
-
-        softAssert.assertAll();
-
+        assertService.assertElementTextEqualsText(products.productTileTitle, SEARCH_HEALTH_BOOK);
 
     }
 
@@ -120,17 +116,15 @@ public class SearchTest extends BaseTestConfiguration {
         SeleniumService seleniumService = new SeleniumService(driver);
         Search search = new Search(driver);
         SearchService searchService = new SearchService(driver);
+        AssertService assertService = new AssertService(driver);
 
         seleniumService.navigateToPage(searchUrl);
 
-        boolean advancedSearchCheckboxValue = search.advancedSearchCheckbox.isSelected();
-        softAssert.assertFalse(advancedSearchCheckboxValue);
+        assertService.assertCheckboxIsNotSelected(search.advancedSearchCheckbox);
 
         seleniumService.clickElement(search.advancedSearchCheckbox);
 
         searchService.verifyAdvancedSearchElementsAreDisplayed();
-
-        softAssert.assertAll();
 
     }
 
@@ -139,23 +133,20 @@ public class SearchTest extends BaseTestConfiguration {
         SeleniumService seleniumService = new SeleniumService(driver);
         Search search = new Search(driver);
         SearchService searchService = new SearchService(driver);
+        AssertService assertService = new AssertService(driver);
 
         seleniumService.navigateToPage(searchUrl);
 
         searchService.startAdvancedSearch(SEARCH_SHORT);
-
-        softAssert.assertEquals(search.warning.getText(), MIN_SEARCH_LENGTH);
+        assertService.assertElementTextEqualsText(search.warning, MIN_SEARCH_LENGTH);
 
         searchService.startAdvancedSearch(EMAIL_INVALID);
-
-        softAssert.assertEquals(search.result.getText(), NO_SEARCH_RESULTS);
-        softAssert.assertAll();
+        assertService.assertElementTextEqualsText(search.result, NO_SEARCH_RESULTS);
     }
 
     @Test
     public void advancedSearchIgnoreCaseTest() {
         SeleniumService seleniumService = new SeleniumService(driver);
-        Search search = new Search(driver);
         SearchService searchService = new SearchService(driver);
         ProductPage products = new ProductPage(driver);
 
@@ -167,9 +158,7 @@ public class SearchTest extends BaseTestConfiguration {
         searchService.startAdvancedSearch(COMPUTER_LOWER);
         int countWithLower = seleniumService.countElementsUsingLocator(products.product);
 
-        softAssert.assertEquals(countWithCapital, countWithLower);
-
-        softAssert.assertAll();
+        assertEquals(countWithCapital, countWithLower);
     }
 
     @Test
@@ -178,6 +167,7 @@ public class SearchTest extends BaseTestConfiguration {
         Search search = new Search(driver);
         SearchService searchService = new SearchService(driver);
         ProductPage products = new ProductPage(driver);
+        AssertService assertService = new AssertService(driver);
 
         seleniumService.navigateToPage(searchUrl);
 
@@ -186,14 +176,11 @@ public class SearchTest extends BaseTestConfiguration {
         seleniumService.selectValueInField(search.categoryDropdown, SEARCH_CATEGORY_BOOKS);
         searchService.startAdvancedSearch(COMPUTER_LOWER);
 
-        softAssert.assertEquals(search.result.getText(), NO_SEARCH_RESULTS);
-
+        assertService.assertElementTextEqualsText(search.result, NO_SEARCH_RESULTS);
         searchService.startAdvancedSearch(SEARCH_HEALTH_BOOK);
 
         int numberOfProducts = seleniumService.countElementsUsingLocator(products.product);
-        softAssert.assertTrue(numberOfProducts > 0);
-
-        softAssert.assertAll();
+        assertTrue(numberOfProducts > 0);
     }
 
     @Test
@@ -202,24 +189,24 @@ public class SearchTest extends BaseTestConfiguration {
         Search search = new Search(driver);
         SearchService searchService = new SearchService(driver);
         ProductPage products = new ProductPage(driver);
+        AssertService assertService = new AssertService(driver);
 
         seleniumService.navigateToPage(searchUrl);
 
-        seleniumService.clickElement(search.advancedSearchCheckbox);
+        seleniumService.selectCheckbox(search.advancedSearchCheckbox);
 
         seleniumService.selectValueInField(search.categoryDropdown, SEARCH_CATEGORY_COMPUTERS);
         searchService.startAdvancedSearch(COMPUTER_LOWER);
 
-        softAssert.assertEquals(search.result.getText(), NO_SEARCH_RESULTS);
-
-        seleniumService.clickElement(search.autoSearchSubCategories);
+        assertService.assertElementTextEqualsText(search.result, NO_SEARCH_RESULTS);
+        seleniumService.selectCheckbox(search.autoSearchSubCategories);
 
         searchService.startAdvancedSearch(COMPUTER_LOWER);
 
         int numberOfProducts = seleniumService.countElementsUsingLocator(products.product);
-        softAssert.assertTrue(numberOfProducts > 0);
 
-        softAssert.assertAll();
+        assertTrue(numberOfProducts > 0);
+
     }
 
     @Test
@@ -228,23 +215,23 @@ public class SearchTest extends BaseTestConfiguration {
         Search search = new Search(driver);
         SearchService searchService = new SearchService(driver);
         ProductPage products = new ProductPage(driver);
+        AssertService assertService = new AssertService(driver);
 
         seleniumService.navigateToPage(searchUrl);
 
-        seleniumService.clickElement(search.advancedSearchCheckbox);
+        seleniumService.selectCheckbox(search.advancedSearchCheckbox);
 
         seleniumService.selectValueInField(search.manufacturerDropdown, SEARCH_MANUFACTURER_TRICENTIS);
         searchService.startAdvancedSearch(COMPUTER_LOWER);
 
-        softAssert.assertEquals(search.result.getText(), NO_SEARCH_RESULTS);
+        assertService.assertElementTextEqualsText(search.result,NO_SEARCH_RESULTS);
 
         seleniumService.selectValueInField(search.manufacturerDropdown, SEARCH_MANUFACTURER_ALL);
         searchService.startAdvancedSearch(COMPUTER_LOWER);
 
         int numberOfProducts = seleniumService.countElementsUsingLocator(products.product);
-        softAssert.assertTrue(numberOfProducts > 0);
+        assertTrue(numberOfProducts > 0);
 
-        softAssert.assertAll();
     }
     @Test
     public void advancedSearchFromPriceTest() {
@@ -252,15 +239,16 @@ public class SearchTest extends BaseTestConfiguration {
         SearchService searchService = new SearchService(driver);
         Search search = new Search(driver);
         ProductPage products = new ProductPage(driver);
+        AssertService assertService = new AssertService(driver);
 
         seleniumService.navigateToPage(searchUrl);
 
-        seleniumService.clickElement(search.advancedSearchCheckbox);
+        seleniumService.selectCheckbox(search.advancedSearchCheckbox);
 
         seleniumService.enterText(search.priceFromInput, SEARCH_PRICE_HIGH);
         searchService.startAdvancedSearch(COMPUTER_LOWER);
 
-        softAssert.assertEquals(search.result.getText(), NO_SEARCH_RESULTS);
+        assertService.assertElementTextEqualsText(search.result,NO_SEARCH_RESULTS);
 
         seleniumService.enterText(search.priceFromInput, SEARCH_PRICE_MIDDLE);
         searchService.startAdvancedSearch(COMPUTER_LOWER);
@@ -275,6 +263,7 @@ public class SearchTest extends BaseTestConfiguration {
         softAssert.assertTrue(numberOfProductsLowPrice > numberOfProductsMiddlePrice);
 
         softAssert.assertAll();
+
     }
     @Test
     public void advancedSearchToPriceTest() {
@@ -282,15 +271,16 @@ public class SearchTest extends BaseTestConfiguration {
         SearchService searchService = new SearchService(driver);
         Search search = new Search(driver);
         ProductPage products = new ProductPage(driver);
+        AssertService assertService = new AssertService(driver);
 
         seleniumService.navigateToPage(searchUrl);
 
-        seleniumService.clickElement(search.advancedSearchCheckbox);
+        seleniumService.selectCheckbox(search.advancedSearchCheckbox);
 
         seleniumService.enterText(search.priceToInput, SEARCH_PRICE_LOW);
         searchService.startAdvancedSearch(COMPUTER_LOWER);
 
-        softAssert.assertEquals(search.result.getText(), NO_SEARCH_RESULTS);
+        assertService.assertElementTextEqualsText(search.result,NO_SEARCH_RESULTS);
 
         seleniumService.enterText(search.priceToInput, SEARCH_PRICE_MIDDLE);
         searchService.startAdvancedSearch(COMPUTER_LOWER);
@@ -313,24 +303,25 @@ public class SearchTest extends BaseTestConfiguration {
         SearchService searchService = new SearchService(driver);
         Search search = new Search(driver);
         ProductPage products = new ProductPage(driver);
+        AssertService assertService = new AssertService(driver);
 
         seleniumService.navigateToPage(searchUrl);
 
-        seleniumService.clickElement(search.advancedSearchCheckbox);
+        seleniumService.selectCheckbox(search.advancedSearchCheckbox);
 
-        searchService.startAdvancedSearch(searchBookPartialDescription);
+        searchService.startAdvancedSearch(SEARCH_BOOK_PARTIAL_DESCRIPTION);
 
-        softAssert.assertEquals(search.result.getText(), NO_SEARCH_RESULTS);
+        assertService.assertElementTextEqualsText(search.result,NO_SEARCH_RESULTS);
 
         seleniumService.clickElement(search.searchDescriptions);
-        searchService.startAdvancedSearch(searchBookPartialDescription);
+        searchService.startAdvancedSearch(SEARCH_BOOK_PARTIAL_DESCRIPTION);
 
         int numberOfProductsMiddlePrice = seleniumService.countElementsUsingLocator(products.product);
         softAssert.assertTrue(numberOfProductsMiddlePrice > 0);
 
         seleniumService.clickElement(products.productTileTitle);
 
-        softAssert.assertTrue(seleniumService.textContainsIgnoreCase(products.productShortDescription.getText(), searchBookPartialDescription), "The text is not contained in the product description");
+        assertService.assertElementTextContainsIgnoreCase(products.productShortDescription, SEARCH_BOOK_PARTIAL_DESCRIPTION);
 
         softAssert.assertAll();
     }
