@@ -1,5 +1,6 @@
 package com.prodyna.configuration;
 
+import com.aventstack.extentreports.ExtentReports;
 import com.prodyna.pageObjects.Header;
 import com.prodyna.services.LoginService;
 import com.prodyna.services.SeleniumService;
@@ -20,6 +21,7 @@ import java.util.concurrent.TimeUnit;
 public class BaseTestConfiguration {
     public WebDriver driver;
     public static SoftAssert softAssert = new SoftAssert();
+    public ExtentReports extentReports;
     protected SeleniumService seleniumService;
     protected Header header;
     protected LoginService loginService;
