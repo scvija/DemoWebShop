@@ -1,5 +1,8 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="All Test Suite">
+    <listeners>
+        <listener class-name="com.prodyna.configuration.TestListener" />
+    </listeners>
     <test verbose="2" preserve-order="true"
           name="D:/Prodyna/LearnCurve/TALS/Bitbucket/tals-v1/src/test/java/com/prodyna/test">
         <classes>
