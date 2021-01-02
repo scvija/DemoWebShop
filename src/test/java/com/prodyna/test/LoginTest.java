@@ -53,7 +53,7 @@ public class LoginTest extends BaseTestConfiguration {
         seleniumService.navigateToPage(loginPageUrl);
 
         loginService.loginWithCredentials(EMAIL_VALID_LOGIN, PASSWORD_VALID);
-        assertService.assertElementTextEqualsText(header.myAccount, EMAIL_VALID_LOGIN + 1);
+        assertService.assertElementTextEqualsText(header.myAccount, EMAIL_VALID_LOGIN);
     }
 
 
